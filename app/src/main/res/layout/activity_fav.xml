@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/cl_test_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <ScrollView
+            android:id="@+id/sv_main_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ly_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+
+                <TextView
+                    android:id="@+id/tv_test_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/list_divider" />
+
+                <LinearLayout
+                    android:id="@+id/ly_select_answers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/label_answer"
+                        android:textColor="@color/red_900"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_answer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@id/tv_label"
+                        android:maxLength="5"
+                        android:singleLine="true"
+                        android:textColor="@color/red_900"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/bt_show_answer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/bt_bg"
+                        android:clickable="true"
+                        android:padding="5dp"
+                        android:text="@string/bt_answer"
+                        android:textColor="@color/bt_next_text"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_answer_long"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </ScrollView>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@mipmap/icon_fav"
+            app:backgroundTint="@color/theme_color"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:fabSize="mini"
+            app:layout_anchor="@id/cl_test_main"
+            app:layout_anchorGravity="bottom|right"
+            app:pressedTranslationZ="12dp"
+            app:rippleColor="@color/theme_color_level2" />
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

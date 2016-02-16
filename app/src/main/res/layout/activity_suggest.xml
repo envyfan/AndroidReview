@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <include layout="@layout/include_toolbar" />
+
+    <android.support.design.widget.TextInputLayout
+
+        android:id="@+id/ti_email_or_qq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:padding="20dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/suggest_qq_or_mail"
+            android:maxLength="500"
+            android:textSize="13sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+
+        android:id="@+id/ti_suggest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ti_email_or_qq"
+        android:padding="20dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/suggest_hind_text"
+            android:maxLength="500"
+            android:textSize="13sp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+</RelativeLayout>

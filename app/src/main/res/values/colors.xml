@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#FFC93437</color>
+    <color name="blue">#FF375BF1</color>
+    <color name="yellow">#FFF7D23E</color>
+    <color name="green">#FF34A350</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#9e9e9e</color>
+
+
+    <color name="carview_no_content">#9e9e9e</color>
+    <color name="brown_500">#795548</color>
+    <color name="deep_orange_900">#bf360c</color>
+    <color name="orange_900">#e65100</color>
+    <color name="green_900">#0d5320</color>
+    <color name="light_blue_900">#01579b</color>
+    <color name="purple_800">#6a1b9a</color>
+    <color name="red_900">#b0120a</color>
+    <color name="red_800">#c41411</color>
+    <color name="pink_600">#d81b60</color>
+
+    <color name="bt_updown">#1e000000</color>
+
+
+    <color name="theme_color">#3F51B5</color><!--App主色调-->
+    <color name="theme_color_level2">#5c6bc0</color><!--App主色调2-->
+    <color name="bg_tab_view">#f4f4f4</color><!--导航栏菜单按钮背景色-->
+    <color name="list_divider">#19000000</color><!--列表item 分割线-->
+
+    <color name="ttt">#b16e09</color><!--App主色调-->
+
+
+
+</resources>

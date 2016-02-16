@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/BaseAppTheme">
+
+    </style>
+
+    <style name="selectableItemBackground">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_test_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vv.androidreview.ui.view.LoadingLayout
+        android:id="@+id/ly_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include layout="@layout/main_test" />
+
+    <RelativeLayout
+        android:id="@+id/ry_test_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_label_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:lineSpacingExtra="15dp"
+            android:text="@string/nong_test"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/bt_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_label_tip"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bt_bg"
+            android:clickable="true"
+            android:padding="5dp"
+            android:text="@string/reset"
+            android:textColor="@color/bt_next_text"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@mipmap/icon_fav"
+        app:backgroundTint="@color/theme_color"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="mini"
+        app:layout_anchor="@id/cl_test_main"
+        app:layout_anchorGravity="bottom|right"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="@color/theme_color_level2" />
+</android.support.design.widget.CoordinatorLayout>

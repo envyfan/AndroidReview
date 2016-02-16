@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vv.androidreview.ui.activites.AuthorActivity">
+    <include layout="@layout/include_toolbar"/>
+
+    <LinearLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="5dp"
+        android:text="        如果觉该应用对你有帮助，可以点击底部的分享按钮，把本应用分享到社交网络让你的小伙伴和更多的人知道，或者可以考虑捐赠支持作者，支持作者把该应用做得更好（金额随意），你的每一分捐赠都是对作者莫大的支持，谢谢！"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:text="支付宝(长按复制):"
+                />
+            <TextView
+                android:textIsSelectable="true"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:text="envyfan@qq.com"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_900"
+            android:textSize="14sp"
+            android:text="该应用的源码可以到作者的github上下载"
+            />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:lineSpacingExtra="5dp"
+            android:text="        本人目前离职在广州正寻找更好的就业机会，有好的介绍可以联系下我T_T"
+            />
+    </LinearLayout>
+</RelativeLayout>

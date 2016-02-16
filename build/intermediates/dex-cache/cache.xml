@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\MyProject\AndroidReview\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d96886efea7cc74fbb3abd0e3b51d5638fc57be0">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-23.1.0_74d1f84ec2a975110387e12da2f57acc36c5d1c0.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\libs\logger.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e43a9d88783876df8f8d544e2473339a0a04e03c">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\logger_a7fe2bde6ee016173bb2d34d9d899800ac554165.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.1.0_aad0d2167984f09ddc43cb69f725989be755126c.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.0_6af2eec774e7428989c6d133a63e7ddf55d7aa87.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\libs\BmobSDK_V3.4.5_1111.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="44e559d18fd5a4826b0a4c0354308213e4f658a2">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\BmobSDK_V3.4.5_1111_3e6df1e5aa127c45d092ffaf0fd7b53c6c141d57.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.0_8165da321960f2a5c5233dd205071ad0bcdada43.jar" />
+    </item>
+    <item
+        jar="E:\android-sdks\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0_ef8d679c0e9cccd7f84873158a97c1700d1f0d2d.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0_8eec7288f7b346193f77d80664b878120ec7e510.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.0_e6c6e890b59db06696855f0e4388bf56cc097326.jar" />
+    </item>
+    <item
+        jar="E:\MyProject\AndroidReview\app\build\intermediates\exploded-aar\in.srain.cube\ultra-ptr\1.0.11\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a0bdf70123d26dd83d8462d602b3a83a41934cf6">
+        <dex dex="E:\MyProject\AndroidReview\app\build\intermediates\pre-dexed\debug\in.srain.cube-ultra-ptr-1.0.11_89fafa610e3c3a7d8167bfdff76038b2a34c8a10.jar" />
+    </item>
+
+</items>

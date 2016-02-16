@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.vv.androidreview"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile files('libs/logger.jar')
+    //bmob-sdk ：Bmob的android sdk包
+    compile 'cn.bmob.android:bmob-sdk:3.4.5'
+    //okhttp（选填）：为解决弱网情况下SDK请求失败及响应慢的问题，自`V3.4.3版本`开始使用`okhttp`优化SDK的网络框架。
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okio:okio:1.4.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'com.android.support:cardview-v7:23.1.0'
+    compile 'com.android.support:support-v4:23.1.0'
+
+
+    //异常捕获(调试用 参考drakeet的开源项目)
+    //debugCompile 'me.drakeet.library:crashwoodpecker:0.9.81'
+    //releaseCompile 'me.drakeet.library:crashwoodpecker-do-nothing:0.9.7'
+
+}

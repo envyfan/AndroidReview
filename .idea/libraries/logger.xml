@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="logger">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/logger.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

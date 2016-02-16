@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rt_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+
+        <ImageView
+            android:id="@+id/img_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/pagefailed_bg"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/pagefailed_bg"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/animProgress"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progressloading"
+            android:indeterminateDuration="2000"
+            android:indeterminateOnly="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/rt_image"
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:lines="2"
+        android:text="@string/loading"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+</RelativeLayout>

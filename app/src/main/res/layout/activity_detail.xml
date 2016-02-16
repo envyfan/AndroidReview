@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+    <include layout="@layout/include_toolbar" />
+    <com.vv.androidreview.ui.view.LoadingLayout
+        android:id="@+id/ly_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.vv.androidreview.ui.view.ScrollViewEx
+        android:id="@+id/ly_main"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_content_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="7dp">
+
+                    <TextView
+                        android:id="@+id/tv_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/gray"
+                        android:textSize="10sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:textColor="@color/gray"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tv_create_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray"
+                        android:textSize="10sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/list_divider" />
+
+            <WebView
+                android:id="@+id/content_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:visibility="visible" />
+
+        </LinearLayout>
+    </com.vv.androidreview.ui.view.ScrollViewEx>
+</LinearLayout>

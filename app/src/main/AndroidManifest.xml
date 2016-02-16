@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vv.androidreview"
+    android:versionCode="1"
+    android:versionName="@string/version_name">
+
+    <!-- Bmob权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <application
+        android:name=".base.system.AppContext"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.activites.AppStartActivity"
+            android:theme="@style/Theme.AppStartLoad">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activites.MainActivity" />
+        <activity android:name=".ui.activites.ListActivity" />
+        <activity android:name=".ui.activites.DetailActivity" />
+        <activity android:name=".ui.activites.FavActivity" />
+        <activity android:name=".ui.activites.SuggestActivity" />
+        <activity android:name=".ui.activites.AboutActivity" />
+        <activity android:name=".ui.activites.AuthorActivity"></activity>
+
+        <meta-data android:value="56b350dee0f55adc20000532" android:name="UMENG_APPKEY"></meta-data>
+    </application>
+
+</manifest>

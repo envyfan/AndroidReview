@@ -1,0 +1,29 @@
+<resources>
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/theme_color</item>
+        <item name="colorPrimaryDark">@color/theme_color</item>
+        <item name="colorAccent">@color/theme_color</item>
+
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/BaseAppTheme">
+
+    </style>
+
+    <style name="ToolBarTitleTextApperance" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+    <style name="Theme.AppStartLoad" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+                <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="selectableItemBackground">
+        <item name="android:background">@drawable/bt_selector</item>
+    </style>
+
+</resources>

@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Android面试复习</string>
+
+    <string name="tip_double_click_exit">再按一次退出</string>
+    <string name="main_tab_name_review">复习</string>
+    <string name="main_tab_name_test">测试</string>
+    <string name="main_tab_name_setting">其他</string>
+    <string name="fail_put_to_refresh">网络不太好请重新尝试</string>
+    <string name="loading">加载中</string>
+    <string name="my_fav">收藏的题目</string>
+    <string name="suggest">意见反馈</string>
+    <string name="submit">提交</string>
+    <string name="about">关于</string>
+    <string name="author">V.v</string>
+    <string name="all_load">已经全部加载完</string>
+    <string name="error_load">加载失败请重试</string>
+    <string name="label_answer">答案：</string>
+    <string name="bt_answer">答案</string>
+    <string name="bt_next">下一题</string>
+    <string name="nong_test">(。﹏。*) \n题库已经没有题目了</string>
+    <string name="reset">再做一遍</string>
+    <string name="dont_no_text">Sorry,不能提交空白信息T_T</string>
+    <string name="thx">非常感谢您的建议，我会做得更好</string>
+    <string name="sugesst_error">信息反馈失败请重试T_T</string>
+    <string name="dont_repeat">您宝贵的意见正在提交中哦，请不要重复提交</string>
+    <string name="bt_hind">隐藏</string>
+    <string name="bt_show">显示</string>
+    <string name="cancel_fav">取消收藏</string>
+    <string name="success_fav">收藏成功</string>
+    <string name="label_author">作者：</string>
+    <string name="label_resource">来源：</string>
+    <string name="version_name">V1.0.0</string>
+    <string name="suggest_qq_or_mail">留下您的QQ或邮箱(选填)</string>
+    <string name="suggest_hind_text">您的建议是我最大的动力</string>
+    <string name="label_other">其他内容</string>
+    <string name="label_suggest">意见反馈</string>
+    <string name="label_update">更新</string>
+    <string name="label_about">关于</string>
+
+
+</resources>

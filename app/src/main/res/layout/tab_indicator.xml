@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tab_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:drawablePadding="-5dp"
+        android:drawableTop="@drawable/tab_icon_review"
+        android:gravity="center"
+        android:textColor="@color/primarybar_txt"
+        android:textSize="12sp" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/tab_mes"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignRight="@id/tab_title"-->
+        <!--android:layout_alignTop="@id/tab_title"-->
+        <!--android:layout_marginLeft="1dip" />-->
+
+</RelativeLayout>

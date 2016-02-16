@@ -1,0 +1,9 @@
+/* 图片大小自适应 */
+img { 
+  max-width:100%; 
+  height:auto;
+}
+p {
+  line-height:2;
+}
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_unit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_color_level2"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/ly_carview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/padding_buttom_to_horizontalscrollview_and_carview"
+            android:paddingTop="@dimen/padding_top_to_horizontalscrollview_and_carview"/>
+    </HorizontalScrollView>
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+    </android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>
