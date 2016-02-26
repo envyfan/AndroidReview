@@ -4,7 +4,7 @@
 
 为了更好地准备面试Android开发这一职位，于是就到应用市场查找相关的复习App,结果发现只有寥寥无几的几款，而且很不好用，AndroidReview因此而诞生。
 
-AndroidReview是一款面向Android开发者的一款面试复习App，里面包含知识点复习和面试题目测试两大模块。使用者不管在何时何地都可以通过该App复习巩固Android知识点。如果你有比较好的资源(博文或者测试题目)也可以联系我更新到该应用哦。（QQ群在下面^_^）
+AndroidReview是一款面向Android开发者的一款面试复习App，里面包含知识点复习和面试题目测试两大模块。使用者不管在何时何地都可以通过该App复习巩固Android知识点。如果你有比较好的资源(博文或者测试题目)也可以联系我更新到该应用哦。（QQ群在下面^_^）**[APK点我下载](https://github.com/envyfan/AndroidReview/blob/master/apk.apk?raw=true)**
 
 **特点：**
 * 知识点归类明细，并且每一篇博文都通过作者阅读后采集进后台，不是简单地采集博文。
