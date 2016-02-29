@@ -36,7 +36,6 @@
         <activity android:name=".ui.activites.AboutActivity" />
         <activity android:name=".ui.activites.AuthorActivity"></activity>
 
-        <meta-data android:value="56b350dee0f55adc20000532" android:name="UMENG_APPKEY"></meta-data>
     </application>
 
 </manifest>
