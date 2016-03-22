@@ -64,3 +64,5 @@ AndroidReview是一款面向Android开发者的一款面试复习App，里面包
 ## 六、声明 ##
 应用中展示的所有内容均搜集自互联网，若内容有侵权请联系作者进行删除处理。本应用仅用作分享与学习，[**源代码在 GPL v3 协议下发布**](https://github.com/envyfan/AndroidReview/blob/master/LICENSE), 使用前, 请确保你了解这个协议!。
 **交流QQ群：206944327**
+
+[**Android程序员：做一款属于自己的实用小应用**](http://www.v-sounds.com/?p=175)
