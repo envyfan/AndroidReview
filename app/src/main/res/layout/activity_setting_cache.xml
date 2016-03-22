@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+  ~
+  ~ This file is part of AndroidReview (Android面试复习)
+  ~
+  ~ AndroidReview is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~  AndroidReview is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~ along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vv.androidreview.ui.activites.SettingCacheActivity">
+
+    <include layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_open_cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/label_open_cache"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_open_cache"
+                android:layout_marginTop="5dp"
+                android:text="@string/label_cache_text"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+
+            <com.sevenheaven.iosswitch.ShSwitchView xmlns:shSwitch="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/switch_view"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                shSwitch:shadowSpace="7dp"
+                shSwitch:tintColor="@color/theme_color" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_wifi_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:id="@+id/tv_label_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WiFi网络环境正文缓存有效期："
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <com.vv.androidreview.ui.view.RangeSliderViewEx
+                android:id="@+id/rsv_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/tv_label_wifi"
+                android:layout_marginTop="10dp"
+                rsv:barHeightPercent="0.1"
+                rsv:emptyColor="@color/gray"
+                rsv:filledColor="@color/theme_color"
+                rsv:rangeCount="5" />
+
+            <TextView
+                android:id="@+id/tv_label_min_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/rsv_wifi"
+                android:layout_marginTop="10dp"
+                android:text="10分钟"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_label_min_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/edt_gb"
+                android:layout_alignBaseline="@id/tv_label_min_wifi"
+                android:layout_toLeftOf="@id/tv_label_min_wifi"
+                android:digits="1234567890"
+                android:maxLength="6"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_other_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tv_label_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他网络环境正文缓存有效期："
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <com.vv.androidreview.ui.view.RangeSliderViewEx
+                android:id="@+id/rsv_other"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/tv_label_other"
+                android:layout_marginTop="10dp"
+                rsv:barHeightPercent="0.1"
+                rsv:emptyColor="@color/gray"
+                rsv:filledColor="@color/theme_color"
+                rsv:rangeCount="5" />
+
+            <TextView
+                android:id="@+id/tv_label_min_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/rsv_other"
+                android:layout_marginTop="10dp"
+                android:text="10分钟"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_label_min_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/edt_gb"
+                android:layout_alignBaseline="@id/tv_label_min_other"
+                android:layout_toLeftOf="@id/tv_label_min_other"
+                android:digits="1234567890"
+                android:maxLength="6"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

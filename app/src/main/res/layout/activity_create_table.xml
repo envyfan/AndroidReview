@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+  ~
+  ~ This file is part of AndroidReview (Android面试复习)
+  ~
+  ~ AndroidReview is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~  AndroidReview is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~ along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vv.androidreview.ui.activites.CreateTableActivity">
+
+    <include layout="@layout/include_toolbar" />
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:max="120"
+        style="?android:attr/progressBarStyleHorizontal"
+        />
+
+    <LinearLayout
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/bt_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_bg"
+            android:clickable="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/action_create"
+            android:textColor="@color/bt_next_text"
+            android:textSize="16sp" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:text="点击执行，即将会为你的所有Bmob数据表插入一条默认数据，如果你还木有创建表格，那么在插入数据的同时会为你自动建表。"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:text="注意：别忘了在AppContext中替换上你的Bmob 应用ApplicationId哦。"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

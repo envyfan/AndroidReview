@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="iosswitch-0.5">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.7heaven.ioswidget/iosswitch/0.5/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.7heaven.ioswidget/iosswitch/0.5/jars/libs/library_nineoldandroids.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.7heaven.ioswidget/iosswitch/0.5/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/AndroidStudioCache/.gradle/caches/modules-2/files-2.1/com.7heaven.ioswidget/iosswitch/0.5/6f2259ca2d5063d4412934fb38619a9c80b30d66/iosswitch-0.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

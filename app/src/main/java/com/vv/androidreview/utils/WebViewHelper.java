@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+ *
+ * This file is part of AndroidReview (Android面试复习)
+ *
+ * AndroidReview is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ *  AndroidReview is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.vv.androidreview.utils;
 
 import android.os.Build;
@@ -34,6 +53,8 @@ public class WebViewHelper {
         settings.setUseWideViewPort(false);  //将图片调整到适合webview的大小
 
         settings.setSupportZoom(true);  //支持缩放
+
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//无论是否有网络，只要本地有缓存，都使用缓存。本地没有缓存时才从网络上获取。 这里的WebView主要是用来加载图片和解析Html文本
 
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
 

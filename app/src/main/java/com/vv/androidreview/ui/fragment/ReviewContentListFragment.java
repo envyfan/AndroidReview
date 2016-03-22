@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+ *
+ * This file is part of AndroidReview (Android面试复习)
+ *
+ * AndroidReview is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ *  AndroidReview is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.vv.androidreview.ui.fragment;
 
 import android.content.Context;
@@ -10,6 +29,7 @@ import android.widget.AdapterView;
 import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
 import com.vv.androidreview.adapter.ContentListAdapter;
+import com.vv.androidreview.base.system.AppContext;
 import com.vv.androidreview.entity.Content;
 import com.vv.androidreview.entity.Point;
 import com.vv.androidreview.cache.ReadCacheAsyncTask;
@@ -79,7 +99,7 @@ public class ReviewContentListFragment extends BasePutToRefreshFragment<ContentL
         if (mContentCount == 0) {
             BmobQuery<Content> query = new BmobQuery<>();
             query.addWhereEqualTo("point", mPoint);
-            query.count(getContext(), Content.class, new CountListener() {
+            query.count(AppContext.getInstance(), Content.class, new CountListener() {
                 @Override
                 public void onSuccess(int i) {
                     mContentCount = i;
@@ -147,7 +167,7 @@ public class ReviewContentListFragment extends BasePutToRefreshFragment<ContentL
             }
         }
         String sql = "select title,small,createdAt from Content where point='"+mPoint.getObjectId()+"' order by updatedAt DESC";
-        query.doSQLQuery(getContext(), sql, new SQLQueryListener<Content>() {
+        query.doSQLQuery(AppContext.getInstance(), sql, new SQLQueryListener<Content>() {
             @Override
             public void done(BmobQueryResult<Content> bmobQueryResult, BmobException e) {
                 if (e == null) {

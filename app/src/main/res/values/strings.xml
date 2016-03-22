@@ -1,4 +1,23 @@
-<resources>
+<!--
+  ~ Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+  ~
+  ~ This file is part of AndroidReview (Android面试复习)
+  ~
+  ~ AndroidReview is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~  AndroidReview is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~ along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Android面试复习</string>
 
     <string name="tip_double_click_exit">再按一次退出</string>
@@ -8,6 +27,7 @@
     <string name="fail_put_to_refresh">网络不太好请重新尝试</string>
     <string name="loading">加载中</string>
     <string name="my_fav">收藏的题目</string>
+    <string name="creat_table">建表/插入默认数据</string>
     <string name="suggest">意见反馈</string>
     <string name="submit">提交</string>
     <string name="about">关于</string>
@@ -33,9 +53,19 @@
     <string name="suggest_qq_or_mail">留下您的QQ或邮箱(选填)</string>
     <string name="suggest_hind_text">您的建议是我最大的动力</string>
     <string name="label_other">其他内容</string>
+    <string name="label_cache">缓存设置</string>
+    <string name="label_open_cache">设置缓存有效期</string>
+    <string name="label_cache_text">开启后正文缓存将会在设定的时间内失效</string>
     <string name="label_suggest">意见反馈</string>
     <string name="label_update">更新</string>
     <string name="label_about">关于</string>
-
+    <string name="no_permissions">应用需要必要的运行权限</string>
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+    <string name="quit">退出</string>
+    <string name="no_cache_over_time">缓存有效时间不能为空哦</string>
+    <string name="action_create">执行</string>
+    <string name="update_text">更新日志</string>
 
 </resources>

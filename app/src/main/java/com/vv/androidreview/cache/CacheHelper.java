@@ -1,9 +1,29 @@
+/*
+ * Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+ *
+ * This file is part of AndroidReview (Android面试复习)
+ *
+ * AndroidReview is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ *  AndroidReview is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.vv.androidreview.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.vv.androidreview.base.system.AppContext;
+import com.vv.androidreview.base.system.Settings;
 import com.vv.androidreview.utils.TDevice;
 
 import java.io.File;
@@ -25,7 +45,7 @@ public class CacheHelper {
     // wifi缓存时间为10分钟
     private static long wifi_cache_time = 10 * 60 * 1000;
     // 其他网络环境为48小时
-    private static long other_cache_time = 2 * 24 *60 * 60 * 1000;
+    private static long other_cache_time = 2 * 24 * 60 * 60 * 1000;
 
     public final static String FAV = "fav.pref";
     public final static String GROUP_LIST_CACHE_KEY = "grup_list";
@@ -162,10 +182,15 @@ public class CacheHelper {
         long existTime = System.currentTimeMillis() - data.lastModified();
         boolean failure = false;
         if (TDevice.getNetworkType() == TDevice.NETTYPE_WIFI) {
-            failure = existTime > wifi_cache_time ? true : false;
+            failure = existTime > Settings.getInt(Settings.CACHE_OVERTIME_WIFI,30) * 60 * 1000 ? true : false;
         } else {
-            failure = existTime > other_cache_time ? true : false;
+            failure = existTime > Settings.getInt(Settings.CACHE_OVERTIME_OTHER,2) * 24 * 60 * 60 * 1000 ? true : false;
         }
         return failure;
     }
+
+    public static boolean isOpenCacheOverTime() {
+        return Settings.getBoolean(Settings.CACHE_OVERTIME,false);
+    }
+
 }

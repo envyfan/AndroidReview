@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+ *
+ * This file is part of AndroidReview (Android面试复习)
+ *
+ * AndroidReview is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ *  AndroidReview is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.vv.androidreview.ui.fragment;
 
 import android.content.Context;
@@ -6,6 +25,7 @@ import android.view.View;
 
 import com.vv.androidreview.R;
 import com.vv.androidreview.adapter.ReviewListAdapter;
+import com.vv.androidreview.adapter.ReviewListAdapterGV;
 import com.vv.androidreview.entity.Point;
 import com.vv.androidreview.entity.Unit;
 import com.vv.androidreview.cache.ReadCacheAsyncTask;
@@ -29,11 +49,11 @@ import cn.bmob.v3.listener.FindListener;
  * Mail：envyfan@qq.com
  * Description：
  */
-public class ReviewFragment extends BasePutToRefreshFragment<ReviewListAdapter> {
+public class ReviewFragment extends BasePutToRefreshFragment<ReviewListAdapterGV> {
 
     public static final String ARGUMENT_POINT_KEY = "argument_point_key";
 
-    private ReviewListAdapter mReviewListAdapter;
+    private ReviewListAdapterGV mReviewListAdapter;
 
     @Override
     public View getRootView() {
@@ -41,8 +61,8 @@ public class ReviewFragment extends BasePutToRefreshFragment<ReviewListAdapter> 
     }
 
     @Override
-    public ReviewListAdapter getAdapter() {
-        mReviewListAdapter = new ReviewListAdapter(getContext());
+    public ReviewListAdapterGV getAdapter() {
+        mReviewListAdapter = new ReviewListAdapterGV(getContext());
         return mReviewListAdapter;
     }
 
@@ -79,51 +99,38 @@ public class ReviewFragment extends BasePutToRefreshFragment<ReviewListAdapter> 
         query.findObjects(getContext(), new FindListener<Unit>() {
             @Override
             public void onSuccess(final List<Unit> unitList) {
-                //初始化Adapter数据
-                final List<Map<String, List<Point>>> listGruop = new ArrayList<>();
-                //执行查询，查询知识点表 取出所有知识点
-                BmobQuery<Point> query = new BmobQuery<>();
-                query.findObjects(getContext(), new FindListener<Point>() {
-                    @Override
-                    public void onSuccess(List<Point> pointList) {
-                        //根据所有单元，组合好以<String,List<Point>> 形式的View以便adapter好处理
-                        for (Unit unit : unitList) {
-                            Map<String, List<Point>> map = new HashMap<>();
-                            List<Point> pointsForUnit = new ArrayList<Point>();
-                            for (Point point : pointList) {
-                                if (point.getUnit().getObjectId().equals(unit.getObjectId())) {
-                                    pointsForUnit.add(point);
-                                }
-                            }
+                //根据查询的所有单元，请求所有的知识点数据
+                requestPointByUnits(unitList);
+            }
+            @Override
+            public void onError(int i, String s) {
+                toastError(mLoadingLayout, getContext());
+            }
+        });
 
-                            //如果无数据，则插入一个空数据用于 友好提示
-                            if (pointsForUnit.size() == 0) {
-                                Point point = new Point();
-                                point.setName("暂无内容\n敬请期待");
-                                point.setColor(ReviewListAdapter.NO_CONTENT);
-                                pointsForUnit.add(point);
-                            }
-                            map.put(unit.getName(), pointsForUnit);
-                            listGruop.add(map);
-                        }
-                        //adapter绑定数据后并且结束下来刷新的加载
-                        mAdapter.notifyAdapter(listGruop);
-                        if (listGruop.size() != 0) {
-                            //把数据缓存到本地
-                            SaveCacheAsyncTask savecaheTask = new SaveCacheAsyncTask(getContext(), (Serializable) listGruop, CacheHelper.GROUP_LIST_CACHE_KEY);
-                            savecaheTask.execute();
-                        }
-                        //更新UI
-                        mLoadingLayout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
-                        mPtrFrameLayout.setVisibility(View.VISIBLE);
-                        mPtrFrameLayout.refreshComplete();
-                    }
+    }
 
-                    @Override
-                    public void onError(int i, String s) {
-                        toastError(mLoadingLayout, getContext());
-                    }
-                });
+    private void requestPointByUnits(final List<Unit> unitList) {
+        //初始化Adapter数据结构
+        final List<Map<String, List<Point>>> listGruop = new ArrayList<>();
+        //执行查询，查询知识点表 取出所有知识点
+        BmobQuery<Point> query = new BmobQuery<>();
+        query.findObjects(getContext(), new FindListener<Point>() {
+            @Override
+            public void onSuccess(List<Point> pointList) {
+                //打包Adapter数据
+                packetAdapterData(pointList, unitList, listGruop);
+                //更新Adapter
+                mAdapter.notifyAdapter(listGruop);
+                if (listGruop.size() != 0) {
+                    //把数据缓存到本地
+                    SaveCacheAsyncTask savecaheTask = new SaveCacheAsyncTask(getContext(), (Serializable) listGruop, CacheHelper.GROUP_LIST_CACHE_KEY);
+                    savecaheTask.execute();
+                }
+                //更新UI
+                mLoadingLayout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
+                mPtrFrameLayout.setVisibility(View.VISIBLE);
+                mPtrFrameLayout.refreshComplete();
             }
 
             @Override
@@ -131,7 +138,35 @@ public class ReviewFragment extends BasePutToRefreshFragment<ReviewListAdapter> 
                 toastError(mLoadingLayout, getContext());
             }
         });
+    }
 
+    /**
+     *
+     * @param pointList 包含所有知识点
+     * @param unitList 包含所有单元
+     * @param listGruop 承载组织好 以String, List<Point> 形式的数据结构 String是单元名称，List<Point>是该单元对应的知识点。
+     */
+    private void packetAdapterData(List<Point> pointList, List<Unit> unitList, List<Map<String, List<Point>>> listGruop) {
+        //根据所有单元，组合好以Map<String,List<Point>> 形式的View以便adapter好处理
+        for (Unit unit : unitList) {
+            Map<String, List<Point>> map = new HashMap<>();
+            List<Point> pointsForUnit = new ArrayList<Point>();
+            for (Point point : pointList) {
+                if (point.getUnit().getObjectId().equals(unit.getObjectId())) {
+                    pointsForUnit.add(point);
+                }
+            }
+
+            //如果无数据，则插入一个空数据用于 友好提示
+            if (pointsForUnit.size() == 0) {
+                Point point = new Point();
+                point.setName("暂无内容\n敬请期待");
+                point.setColor(ReviewListAdapter.NO_CONTENT);
+                pointsForUnit.add(point);
+            }
+            map.put(unit.getName(), pointsForUnit);
+            listGruop.add(map);
+        }
     }
 
     private void toastError(LoadingLayout loadingLayout, Context context) {

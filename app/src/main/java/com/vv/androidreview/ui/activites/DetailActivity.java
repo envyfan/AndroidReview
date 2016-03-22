@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
+ *
+ * This file is part of AndroidReview (Android面试复习)
+ *
+ * AndroidReview is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ *  AndroidReview is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.vv.androidreview.ui.activites;
 
 import android.content.Intent;
@@ -10,6 +29,7 @@ import android.widget.Toast;
 import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
 import com.vv.androidreview.base.BaseActivity;
+import com.vv.androidreview.base.system.Settings;
 import com.vv.androidreview.cache.CacheHelper;
 import com.vv.androidreview.cache.ReadCacheAsyncTask;
 import com.vv.androidreview.cache.SaveCacheAsyncTask;
@@ -26,8 +46,9 @@ import cn.bmob.v3.listener.GetListener;
 public class DetailActivity extends BaseActivity {
 
     private Content mContent;
-    private TextView mContentTitle,mAuthor,mCreateTime,mSource;
+    private TextView mContentTitle, mAuthor, mCreateTime, mSource;
     private WebView mWebView;
+    private String mPonitName;
 
     //加载状态的布局
     private LoadingLayout mLoadingLayout;
@@ -49,18 +70,31 @@ public class DetailActivity extends BaseActivity {
     private void loadData() {
         //是否有缓存
         boolean hasCache = CacheHelper.isExistDataCache(this, CacheHelper.CONTENT_CACHE_KEY + mContent.getObjectId());
-        //缓存是否过期 这里设置了WIFI环境下10分钟过期，普通网络下48小时过期，已达到能尽可能和服务器数据同步
+        //缓存是否过期
         boolean isCacheOverTiem = CacheHelper.isCacheDataFailure(this, CacheHelper.CONTENT_CACHE_KEY + mContent.getObjectId());
-        //有网络并且有没缓存||有网络且缓存过期  就请求网络数据 否则 读取缓存
-        if ((TDevice.hasInternet() && !hasCache) || (TDevice.hasInternet() && isCacheOverTiem)) {
+        //是否开启缓存过期设置
+        boolean isOpenCacheOverTime = CacheHelper.isOpenCacheOverTime();
+        //有网络并且有没缓存||有网络且有启动缓存过期设置且缓存过期  就请求网络数据 否则 读取缓存
+
+
+        if (TDevice.hasInternet() && (!hasCache || (isOpenCacheOverTime && isCacheOverTiem))) {
             //从网络上读取数据
             loadDataByNet();
+            Logger.e("detail_page hasCache : " + hasCache + "\n"
+                    + "detail_page isCacheOverTiem : " + isCacheOverTiem + "\n"
+                    + "detail_page isOpenCacheOverTime : " + isOpenCacheOverTime + "\n"
+                    + "detail_page request net");
         } else {
             //用AsynTask读取缓存
             readCache();
+            Logger.e("detail_page hasCache : " + hasCache + "\n"
+                    + "detail_page isCacheOverTiem : " + isCacheOverTiem + "\n"
+                    + "detail_page isOpenCacheOverTime : " + isOpenCacheOverTime + "\n"
+                    + "detail_page readCache");
         }
 
     }
+
     private void initView() {
         mLoadingLayout = (LoadingLayout) findViewById(R.id.ly_loading);
         mScrollViewEx = (ScrollViewEx) findViewById(R.id.ly_main);
@@ -94,7 +128,7 @@ public class DetailActivity extends BaseActivity {
                 }
             }
         });
-        readAsyncTask.execute(CacheHelper.CONTENT_CACHE_KEY+mContent.getObjectId());
+        readAsyncTask.execute(CacheHelper.CONTENT_CACHE_KEY + mContent.getObjectId());
     }
 
     //加载数据
@@ -107,14 +141,14 @@ public class DetailActivity extends BaseActivity {
         mWebView.loadDataWithBaseURL(null, WebViewHelper.getWebViewHtml(mContent), "text/html", "UTF-8", null);
     }
 
-    private void loadDataByNet(){
+    private void loadDataByNet() {
         BmobQuery<Content> query = new BmobQuery<>();
         query.getObject(DetailActivity.this, mContent.getObjectId(), new GetListener<Content>() {
             @Override
             public void onSuccess(Content content) {
                 setData(content);
                 //把数据缓存到本地
-                SaveCacheAsyncTask savecaheTask = new SaveCacheAsyncTask(DetailActivity.this,content, CacheHelper.CONTENT_CACHE_KEY+mContent.getObjectId());
+                SaveCacheAsyncTask savecaheTask = new SaveCacheAsyncTask(DetailActivity.this, content, CacheHelper.CONTENT_CACHE_KEY + mContent.getObjectId());
                 savecaheTask.execute();
                 mLoadingLayout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
                 mScrollViewEx.setVisibility(View.VISIBLE);
@@ -137,20 +171,20 @@ public class DetailActivity extends BaseActivity {
     }
 
 
-
     private void initArguments() {
         Intent intent = getIntent();
-        if(intent!=null){
+        if (intent != null) {
             mContent = (Content) intent.getSerializableExtra(ReviewContentListFragment.ARGUMENT_CONTEN_KEY);
+            mPonitName = mContent.getPoint().getName();
         }
-        
+
     }
 
     @Override
     public String returnToolBarTitle() {
-        if(mContent!=null){
-            return mContent.getPoint().getName();
-        }else{
+        if (mPonitName != null) {
+            return mPonitName;
+        } else {
             return getString(R.string.app_name);
         }
     }
