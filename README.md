@@ -29,7 +29,7 @@ AndroidReview是一款面向Android开发者的一款面试复习App，里面包
 
 ## 三、运行截图 ##
 
-![](https://github.com/envyfan/AndroidReview/blob/master/pic/pics.png?raw=true)
+![](https://github.com/envyfan/AndroidReview/blob/master/pic/v110.png?raw=true)
 
 ## 四、导入说明 ##
 
@@ -62,5 +62,5 @@ AndroidReview是一款面向Android开发者的一款面试复习App，里面包
 知识点复习大部分博文都来自鸿洋、郭林等大神的博客，非常感谢像他们一样的开发者在网上分享自己的技术经验，让我们受益匪浅。另外也非常感谢oschina这个开源项目，在里面我学习到了很多东西，包括基类的封装、使用缓存策略、网络环境判断等等。
 
 ## 六、声明 ##
-应用中展示的所有内容均搜集自互联网，若内容有侵权请联系作者进行删除处理。本应用仅用作分享与学习，**源代码在 GPL v3 协议下发布**, 使用前, 请确保你了解这个协议!。
+应用中展示的所有内容均搜集自互联网，若内容有侵权请联系作者进行删除处理。本应用仅用作分享与学习，[**源代码在 GPL v3 协议下发布**](https://github.com/envyfan/AndroidReview/blob/master/LICENSE), 使用前, 请确保你了解这个协议!。
 **交流QQ群：206944327**
