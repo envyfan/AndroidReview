@@ -1,4 +1,4 @@
-#  AndroidReview (Adnroid面试复习) #
+#  AndroidReview (Android面试复习) #
 
 ## 一、项目简介 ##
 
