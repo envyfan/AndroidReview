@@ -22,21 +22,17 @@ package com.vv.androidreview.ui.activites;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 
 import com.vv.androidreview.R;
 import com.vv.androidreview.base.system.AppManager;
 import com.vv.androidreview.utils.PermissionsChecker;
-import com.vv.androidreview.utils.ToastHelper;
 
 
 public class AppStartActivity extends Activity {
 
-    private final int SPLASH_DISPLAY_LENGHT = 2000; // 休眠2秒
+    private static final int SPLASH_DISPLAY_LENGTH = 2000; // 休眠2秒
 
     private static final int REQUEST_CODE = 0; // 请求码
 
@@ -89,7 +85,7 @@ public class AppStartActivity extends Activity {
             public void run() {
                 redirectTo();
             }
-        }, SPLASH_DISPLAY_LENGHT);
+        }, SPLASH_DISPLAY_LENGTH);
     }
 
     /**

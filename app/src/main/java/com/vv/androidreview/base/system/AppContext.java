@@ -21,7 +21,7 @@ package com.vv.androidreview.base.system;
 
 
 import com.orhanobut.logger.Logger;
-import com.vv.androidreview.base.BaseApplication;
+import com.vv.androidreview.mvp.base.BaseApplication;
 
 import cn.bmob.v3.Bmob;
 /**
@@ -33,7 +33,7 @@ public class AppContext extends BaseApplication {
 
     private static AppContext instance;
 
-    private static final String ApplicationID = "这里输入你的Bmob ApplicationID";
+    private static final String ApplicationID = "672c9dcecc784c66cda63b0fa32bffa7";
 
     @Override
     public void onCreate() {

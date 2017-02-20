@@ -31,22 +31,22 @@ import android.widget.Toast;
 
 import com.sevenheaven.iosswitch.ShSwitchView;
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
 import com.vv.androidreview.base.system.Settings;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 import com.vv.androidreview.ui.view.RangeSliderViewEx;
 
-public class SettingCacheActivity extends BaseActivity {
+public class SettingCacheActivity extends BaseToolbarActivity {
 
     public static final String MINUTE = "分钟";
     public static final String DAY = "天";
-    public static final String Lable = "(自定义)";
+    public static final String LABEL = "(自定义)";
     public static final int MINUTE_STEP = 30;
     public static final int DAY_STEP = 2;
     //过期控制开关
-    private ShSwitchView mCacheSwich;
-    private RelativeLayout mWifiSwichLayout, mOtherSwichLayout;
+    private ShSwitchView mCacheSwitch;
+    private RelativeLayout mWifiSwitchLayout, mOtherSwitchLayout;
     //显示选择的分钟文本
-    private TextView mLableWifi, mLableOther;
+    private TextView mLabelWifi, mLabelOther;
     //输入分钟
     private EditText mEtWifi, mEtOther;
 
@@ -61,8 +61,7 @@ public class SettingCacheActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_cache);
         initView();
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true,getString(R.string.label_cache));
         initListener();
         bindData();
     }
@@ -100,7 +99,7 @@ public class SettingCacheActivity extends BaseActivity {
                 }
                 Settings.putInt(Settings.CACHE_OVERTIME_WIFI, mWifiMin);
                 Settings.putInt(Settings.CACHE_OVERTIME_OTHER, mOtherDay);
-                Settings.putBoolean(Settings.CACHE_OVERTIME, mCacheSwich.isOn());
+                Settings.putBoolean(Settings.CACHE_OVERTIME, mCacheSwitch.isOn());
                 finish();
                 break;
             default:
@@ -110,7 +109,7 @@ public class SettingCacheActivity extends BaseActivity {
     }
 
     private void initListener() {
-        mCacheSwich.setOnSwitchStateChangeListener(new ShSwitchView.OnSwitchStateChangeListener() {
+        mCacheSwitch.setOnSwitchStateChangeListener(new ShSwitchView.OnSwitchStateChangeListener() {
             @Override
             public void onSwitchStateChange(boolean isOn) {
                 showOrHideLayout(isOn);
@@ -126,11 +125,11 @@ public class SettingCacheActivity extends BaseActivity {
                     mEtWifi.setText(mWifiMin + "");
                     mEtWifi.setVisibility(View.VISIBLE);
                     mEtWifi.requestFocus();
-                    mLableWifi.setText(MINUTE+Lable);
+                    mLabelWifi.setText(MINUTE+ LABEL);
                 } else {
                     mEtWifi.setVisibility(View.GONE);
                     mWifiMin = (index + 1) * MINUTE_STEP;
-                    mLableWifi.setText(mWifiMin + MINUTE);
+                    mLabelWifi.setText(mWifiMin + MINUTE);
                 }
             }
         });
@@ -144,11 +143,11 @@ public class SettingCacheActivity extends BaseActivity {
                     mEtOther.setText(mOtherDay + "");
                     mEtOther.setVisibility(View.VISIBLE);
                     mEtOther.requestFocus();
-                    mLableOther.setText(DAY+Lable);
+                    mLabelOther.setText(DAY+ LABEL);
                 } else {
                     mEtOther.setVisibility(View.GONE);
                     mOtherDay = (index + 1) * DAY_STEP;
-                    mLableOther.setText(mOtherDay + DAY);
+                    mLabelOther.setText(mOtherDay + DAY);
                 }
             }
         });
@@ -157,7 +156,7 @@ public class SettingCacheActivity extends BaseActivity {
     private void bindData() {
         boolean isOpen = Settings.getBoolean(Settings.CACHE_OVERTIME, false);
         showOrHideLayout(isOpen);
-        mCacheSwich.setOn(isOpen);
+        mCacheSwitch.setOn(isOpen);
 
         int wifiOverTime = Settings.getInt(Settings.CACHE_OVERTIME_WIFI, 30);
         int otherOverTime = Settings.getInt(Settings.CACHE_OVERTIME_OTHER, 2);
@@ -173,7 +172,7 @@ public class SettingCacheActivity extends BaseActivity {
 
         if (mOtherDay <= DAY_STEP * (mRsvOther.getRangeCount() - 1) && dayStep >= 0) {
             mRsvOther.setInitialIndex(dayStep);
-            mLableOther.setText(otherOverTime + DAY);
+            mLabelOther.setText(otherOverTime + DAY);
         } else {
             if (mOtherDay > DAY_STEP) {
                 mRsvOther.setInitialIndex(mRsvOther.getRangeCount() - 1);
@@ -182,7 +181,7 @@ public class SettingCacheActivity extends BaseActivity {
                 mRsvOther.setInitialIndex(0);
             }
             mEtOther.setText(mOtherDay + "");
-            mLableOther.setText(DAY);
+            mLabelOther.setText(DAY);
         }
     }
 
@@ -191,7 +190,7 @@ public class SettingCacheActivity extends BaseActivity {
 
         if (mWifiMin <= MINUTE_STEP * (mRsvWifi.getRangeCount() - 1) && minStep >= 0) {
             mRsvWifi.setInitialIndex(minStep);
-            mLableWifi.setText(wifiOverTime + MINUTE);
+            mLabelWifi.setText(wifiOverTime + MINUTE);
         } else {
             if (minStep > MINUTE_STEP) {
                 mRsvWifi.setInitialIndex(mRsvWifi.getRangeCount() - 1);
@@ -201,16 +200,16 @@ public class SettingCacheActivity extends BaseActivity {
             }
             mEtWifi.setText(mWifiMin + "");
 
-            mLableWifi.setText(MINUTE);
+            mLabelWifi.setText(MINUTE);
         }
     }
 
     private void initView() {
-        mWifiSwichLayout = (RelativeLayout) findViewById(R.id.rl_wifi_cache);
-        mOtherSwichLayout = (RelativeLayout) findViewById(R.id.rl_other_cache);
+        mWifiSwitchLayout = (RelativeLayout) findViewById(R.id.rl_wifi_cache);
+        mOtherSwitchLayout = (RelativeLayout) findViewById(R.id.rl_other_cache);
 
-        mLableWifi = (TextView) findViewById(R.id.tv_label_min_wifi);
-        mLableOther = (TextView) findViewById(R.id.tv_label_min_other);
+        mLabelWifi = (TextView) findViewById(R.id.tv_label_min_wifi);
+        mLabelOther = (TextView) findViewById(R.id.tv_label_min_other);
 
         mEtWifi = (EditText) findViewById(R.id.et_label_min_wifi);
         mEtOther = (EditText) findViewById(R.id.et_label_min_other);
@@ -218,22 +217,17 @@ public class SettingCacheActivity extends BaseActivity {
         mRsvWifi = (RangeSliderViewEx) findViewById(R.id.rsv_wifi);
         mRsvOther = (RangeSliderViewEx) findViewById(R.id.rsv_other);
 
-        mCacheSwich = (ShSwitchView) findViewById(R.id.switch_view);
+        mCacheSwitch = (ShSwitchView) findViewById(R.id.switch_view);
 
-    }
-
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.label_cache);
     }
 
     private void showOrHideLayout(boolean isOpen) {
         if (isOpen) {
-            mWifiSwichLayout.setVisibility(View.VISIBLE);
-            mOtherSwichLayout.setVisibility(View.VISIBLE);
+            mWifiSwitchLayout.setVisibility(View.VISIBLE);
+            mOtherSwitchLayout.setVisibility(View.VISIBLE);
         } else {
-            mWifiSwichLayout.setVisibility(View.INVISIBLE);
-            mOtherSwichLayout.setVisibility(View.INVISIBLE);
+            mWifiSwitchLayout.setVisibility(View.INVISIBLE);
+            mOtherSwitchLayout.setVisibility(View.INVISIBLE);
         }
     }
 }

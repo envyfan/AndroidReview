@@ -19,7 +19,6 @@
 
 package com.vv.androidreview.ui.activites;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
@@ -31,12 +30,11 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 import com.vv.androidreview.ui.fragment.Indicator;
 import com.vv.androidreview.utils.DoubleClickExitHelper;
-import com.vv.androidreview.utils.ToastHelper;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseToolbarActivity {
 
     private DoubleClickExitHelper mDoubleClickExit;
     private FragmentTabHost mFragmentTabHost;
@@ -50,7 +48,7 @@ public class MainActivity extends BaseActivity {
         mRootView = LayoutInflater.from(this).inflate(R.layout.activity_main,null);
         setContentView(mRootView);
 
-        initToolBar();
+        initToolBar(false,getString(R.string.app_name));
         initView();
         setStatusBarCompat();
     }
@@ -118,10 +116,6 @@ public class MainActivity extends BaseActivity {
         return view;
     }
 
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.app_name);
-    }
 
     /**
      * 监听返回--是否退出程序

@@ -48,7 +48,7 @@ import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 
 public class ReviewContentListFragment extends BasePutToRefreshFragment<ContentListAdapter> {
-    public static final String ARGUMENT_CONTEN_KEY = "argument_conten_key";
+    public static final String ARGUMENT_CONTENT_KEY = "argument_content_key";
     private int mContentCount = 0;
     private Point mPoint;
     private ContentListAdapter mContentListAdapter;
@@ -78,7 +78,7 @@ public class ReviewContentListFragment extends BasePutToRefreshFragment<ContentL
             }
 
             @Override
-            public void postExectue(List<Content> data) {
+            public void postExecute(List<Content> data) {
                 if (data == null || data.size() == 0) {
                     mLoadingLayout.setLoadingLayout(LoadingLayout.NETWORK_REFRESH);
                     mPtrFrameLayout.autoRefresh(true);
@@ -144,7 +144,7 @@ public class ReviewContentListFragment extends BasePutToRefreshFragment<ContentL
                     Content content = (Content) parent.getItemAtPosition(position);
                     content.setPoint(mPoint);
                     Intent intent = new Intent(getContext(), DetailActivity.class);
-                    intent.putExtra(ARGUMENT_CONTEN_KEY, content);
+                    intent.putExtra(ARGUMENT_CONTENT_KEY, content);
                     getContext().startActivity(intent);
                 }
             }
@@ -176,8 +176,8 @@ public class ReviewContentListFragment extends BasePutToRefreshFragment<ContentL
                     if (actionType == REFRESH_TYPE_PULL) {
                         mContentListAdapter.notifyAdapter(list);
                         //把数据缓存到本地
-                        SaveCacheAsyncTask savecaheTask = new SaveCacheAsyncTask(getContext(), (Serializable) list, CacheHelper.CONTENT_LIST_CACHE_KEY + mPoint.getName());
-                        savecaheTask.execute();
+                        SaveCacheAsyncTask saveCacheAsyncTask = new SaveCacheAsyncTask(getContext(), (Serializable) list, CacheHelper.CONTENT_LIST_CACHE_KEY + mPoint.getName());
+                        saveCacheAsyncTask.execute();
                         if (list.size() != 0) {
                             mLoadingLayout.setLoadingLayout(LoadingLayout.HIDE_LAYOUT);
                             mPtrFrameLayout.setVisibility(View.VISIBLE);

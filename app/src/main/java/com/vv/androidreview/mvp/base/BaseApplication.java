@@ -17,7 +17,7 @@
  * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vv.androidreview.base;
+package com.vv.androidreview.mvp.base;
 
 import android.app.Application;
 import android.content.Context;

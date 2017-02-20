@@ -30,24 +30,23 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
 import com.vv.androidreview.entity.Suggest;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 
 import cn.bmob.v3.listener.SaveListener;
 
-public class SuggestActivity extends BaseActivity {
-    private TextInputLayout mTiSuggest,mTiMailOrQq;
+public class SuggestActivity extends BaseToolbarActivity {
+    private TextInputLayout mTiSuggest, mTiMailOrQq;
     private View mRootView;
     //防止多次提交数据
-    private boolean isPosting=false;
+    private boolean isPosting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRootView = LayoutInflater.from(this).inflate(R.layout.activity_suggest,null);
+        mRootView = LayoutInflater.from(this).inflate(R.layout.activity_suggest, null);
         setContentView(mRootView);
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true, getString(R.string.suggest));
         setStatusBarCompat();
 
         mTiSuggest = (TextInputLayout) findViewById(R.id.ti_suggest);
@@ -62,16 +61,16 @@ public class SuggestActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_submit:
                 String msg = mTiSuggest.getEditText().getText().toString();
-                if(TextUtils.isEmpty(msg)){
+                if (TextUtils.isEmpty(msg)) {
                     Snackbar.make(mRootView, R.string.dont_no_text, Snackbar.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Suggest suggest = new Suggest();
                     suggest.setMsg(msg);
                     suggest.setMail_qq(mTiMailOrQq.getEditText().getText().toString());
-                    if(!isPosting) {
+                    if (!isPosting) {
                         isPosting = true;
                         suggest.save(SuggestActivity.this, new SaveListener() {
                             @Override
@@ -87,7 +86,7 @@ public class SuggestActivity extends BaseActivity {
                                 Snackbar.make(mRootView, R.string.sugesst_error, Snackbar.LENGTH_SHORT).show();
                             }
                         });
-                    }else{
+                    } else {
                         Snackbar.make(mRootView, R.string.dont_repeat, Snackbar.LENGTH_SHORT).show();
                     }
                 }
@@ -102,8 +101,4 @@ public class SuggestActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.suggest);
-    }
 }

@@ -45,7 +45,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 
-import com.vv.androidreview.base.BaseApplication;
+import com.vv.androidreview.mvp.base.BaseApplication;
 import com.vv.androidreview.base.system.AppContext;
 
 import java.io.File;

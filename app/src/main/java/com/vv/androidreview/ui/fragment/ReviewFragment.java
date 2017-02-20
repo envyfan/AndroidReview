@@ -194,7 +194,7 @@ public class ReviewFragment extends BasePutToRefreshFragment<ReviewListAdapterGV
             }
 
             @Override
-            public void postExectue(List<Map<String, List<Point>>> data) {
+            public void postExecute(List<Map<String, List<Point>>> data) {
                 if (data == null || data.size() == 0) {
                     mLoadingLayout.setLoadingLayout(LoadingLayout.NETWORK_REFRESH);
                     mPtrFrameLayout.autoRefresh(true);

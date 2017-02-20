@@ -19,7 +19,6 @@
 
 package com.vv.androidreview.ui.activites;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,24 +28,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
 import com.vv.androidreview.entity.VersionNote;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VersionNoteActivity extends BaseActivity {
+public class VersionNoteActivity extends BaseToolbarActivity {
 
     private ListView mListView;
 
-    private List<VersionNote> mDatas = new ArrayList<>();
+    private List<VersionNote> mData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_version_note);
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true, getString(R.string.update_text));
         mListView = (ListView) findViewById(R.id.listview);
         initDatas();
         mListView.setAdapter(new VersionNoteAdapter());
@@ -54,29 +52,24 @@ public class VersionNoteActivity extends BaseActivity {
 
     private void initDatas() {
         VersionNote v1 = new VersionNote("V1.0.0", "2016.02.22", "1、版本首发");
-        mDatas.add(v1);
+        mData.add(v1);
         VersionNote v2 = new VersionNote("V1.0.1", "2016.03.09", "1、修正了某些机型不能访问网络（6.0权限问题）" + "\n"
                 + "2、优化了首页界面,改为GridView" + "\n"
                 + "3、添加正文缓存有效期控制，默认情况下关闭有效期（即缓存永不过期）" + "\n"
                 + "4、添加一件建表，方便阅读源码的朋友更易上手（发布版此功能隐藏）");
-        mDatas.add(v2);
-    }
-
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.update_text);
+        mData.add(v2);
     }
 
     private class VersionNoteAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return mDatas.size();
+            return mData.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return mDatas.get(position);
+            return mData.get(position);
         }
 
         @Override
@@ -86,7 +79,7 @@ public class VersionNoteActivity extends BaseActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            VersionNote versionNote = mDatas.get(position);
+            VersionNote versionNote = mData.get(position);
             ViewHolder holder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(VersionNoteActivity.this).inflate(R.layout.itme_note_text, parent, false);

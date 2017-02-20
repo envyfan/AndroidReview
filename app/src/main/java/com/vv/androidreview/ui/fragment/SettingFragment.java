@@ -19,7 +19,6 @@
 
 package com.vv.androidreview.ui.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,13 +27,10 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
 import com.vv.androidreview.base.BaseFragment;
-import com.vv.androidreview.entity.Suggest;
 import com.vv.androidreview.ui.activites.AboutActivity;
 import com.vv.androidreview.ui.activites.CreateTableActivity;
 import com.vv.androidreview.ui.activites.ListActivity;
-import com.vv.androidreview.ui.activites.MainActivity;
 import com.vv.androidreview.ui.activites.SettingCacheActivity;
 import com.vv.androidreview.ui.activites.SuggestActivity;
 

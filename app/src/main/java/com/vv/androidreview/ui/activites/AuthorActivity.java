@@ -19,26 +19,19 @@
 
 package com.vv.androidreview.ui.activites;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 
-public class AuthorActivity extends BaseActivity {
+public class AuthorActivity extends BaseToolbarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_author);
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true, getString(R.string.author));
         setStatusBarCompat();
     }
 
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.author);
-
-    }
 }

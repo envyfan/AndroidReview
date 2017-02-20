@@ -19,31 +19,28 @@
 
 package com.vv.androidreview.ui.activites;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseToolbarActivity {
 
-    private TextView mBtAuthor,mBtUpdate;
+    private TextView mBtAuthor, mBtUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        initToolBar();
-        showOrHideToolBarNavigation(true);
-
+        initToolBar(true, getString(R.string.about));
         mBtAuthor = (TextView) findViewById(R.id.bt_about_author);
         mBtAuthor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutActivity.this,AuthorActivity.class);
+                Intent intent = new Intent(AboutActivity.this, AuthorActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,7 +49,7 @@ public class AboutActivity extends BaseActivity {
         mBtUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutActivity.this,VersionNoteActivity.class);
+                Intent intent = new Intent(AboutActivity.this, VersionNoteActivity.class);
                 startActivity(intent);
             }
         });
@@ -60,8 +57,4 @@ public class AboutActivity extends BaseActivity {
         setStatusBarCompat();
     }
 
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.about);
-    }
 }

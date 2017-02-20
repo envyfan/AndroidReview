@@ -23,7 +23,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.vv.androidreview.ui.activites.MainActivity;
+import com.vv.androidreview.mvp.base.BaseActivity;
 
 
 /**

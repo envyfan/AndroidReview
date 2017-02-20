@@ -354,7 +354,7 @@ public class TestFragment extends BaseFragment {
             }
 
             @Override
-            public void postExectue(Test data) {
+            public void postExecute(Test data) {
                 //读取缓存的操作。生成选择项改变布局等操作
                 mTest = data;
                 showTest();

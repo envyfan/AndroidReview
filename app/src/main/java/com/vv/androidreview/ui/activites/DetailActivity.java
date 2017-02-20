@@ -24,16 +24,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
-import com.vv.androidreview.base.system.Settings;
 import com.vv.androidreview.cache.CacheHelper;
 import com.vv.androidreview.cache.ReadCacheAsyncTask;
 import com.vv.androidreview.cache.SaveCacheAsyncTask;
 import com.vv.androidreview.entity.Content;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 import com.vv.androidreview.ui.fragment.ReviewContentListFragment;
 import com.vv.androidreview.ui.view.LoadingLayout;
 import com.vv.androidreview.ui.view.ScrollViewEx;
@@ -43,12 +41,12 @@ import com.vv.androidreview.utils.WebViewHelper;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.GetListener;
 
-public class DetailActivity extends BaseActivity {
+public class DetailActivity extends BaseToolbarActivity {
 
     private Content mContent;
     private TextView mContentTitle, mAuthor, mCreateTime, mSource;
     private WebView mWebView;
-    private String mPonitName;
+    private String mPointName;
 
     //加载状态的布局
     private LoadingLayout mLoadingLayout;
@@ -60,8 +58,7 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         initArguments();
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true, mPointName != null ? mPointName : getString(R.string.app_name));
         initView();
         setStatusBarCompat();
         loadData();
@@ -81,14 +78,14 @@ public class DetailActivity extends BaseActivity {
             //从网络上读取数据
             loadDataByNet();
             Logger.e("detail_page hasCache : " + hasCache + "\n"
-                    + "detail_page isCacheOverTiem : " + isCacheOverTiem + "\n"
+                    + "detail_page isCacheOverTime : " + isCacheOverTiem + "\n"
                     + "detail_page isOpenCacheOverTime : " + isOpenCacheOverTime + "\n"
                     + "detail_page request net");
         } else {
             //用AsynTask读取缓存
             readCache();
             Logger.e("detail_page hasCache : " + hasCache + "\n"
-                    + "detail_page isCacheOverTiem : " + isCacheOverTiem + "\n"
+                    + "detail_page isCacheOverTime : " + isCacheOverTiem + "\n"
                     + "detail_page isOpenCacheOverTime : " + isOpenCacheOverTime + "\n"
                     + "detail_page readCache");
         }
@@ -117,7 +114,7 @@ public class DetailActivity extends BaseActivity {
             }
 
             @Override
-            public void postExectue(Content data) {
+            public void postExecute(Content data) {
                 if (data == null) {
                     loadDataByNet();
                 } else {
@@ -174,19 +171,10 @@ public class DetailActivity extends BaseActivity {
     private void initArguments() {
         Intent intent = getIntent();
         if (intent != null) {
-            mContent = (Content) intent.getSerializableExtra(ReviewContentListFragment.ARGUMENT_CONTEN_KEY);
-            mPonitName = mContent.getPoint().getName();
+            mContent = (Content) intent.getSerializableExtra(ReviewContentListFragment.ARGUMENT_CONTENT_KEY);
+            mPointName = mContent.getPoint().getName();
         }
 
-    }
-
-    @Override
-    public String returnToolBarTitle() {
-        if (mPonitName != null) {
-            return mPonitName;
-        } else {
-            return getString(R.string.app_name);
-        }
     }
 
     @Override

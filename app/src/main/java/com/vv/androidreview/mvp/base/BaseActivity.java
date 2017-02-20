@@ -17,13 +17,11 @@
  * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vv.androidreview.base;
+package com.vv.androidreview.mvp.base;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
@@ -39,8 +37,6 @@ import com.vv.androidreview.utils.TDevice;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,77 +44,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         //禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         AppManager.getAppManager().addActivity(this);
-//        隐藏ToolBar
-//        hideToolBar();
         Logger.d("当前Activity 栈中有：" + AppManager.getAppManager().getActivityCount() + "个Activity");
     }
 
-
-    /**
-     * 隐藏ToolBar
-     */
-    public void hideToolBar() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-    }
-
-    /**
-     * 显示ToolBar
-     */
-    public void showToolBar() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().show();
-        }
-    }
-
-    /**
-     * 初始化ToolBar
-     */
-    public void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.tb_toolbar);
-        if (toolbar != null) {
-//            toolbar.setLogo(R.mipmap.ic_top);
-            toolbar.setBackgroundColor(getResources().getColor(R.color.theme_color));
-            toolbar.setTitleTextAppearance(this, R.style.ToolBarTitleTextApperance);
-            setSupportActionBar(toolbar);
-        }
-    }
-
-
-
-    /**
-     * 是否隐藏ToolBar返回按钮
-     *
-     * @param show
-     */
-    public void showOrHideToolBarNavigation(boolean show) {
-        if (show) {
-            toolbar.setNavigationIcon(R.mipmap.ic_top_back);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
-        } else {
-            toolbar.setNavigationIcon(null);
-            toolbar.setNavigationOnClickListener(null);
-        }
-    }
-
-    /**
-     * 是否隐藏ToolBar Logo
-     *
-     * @param show
-     */
-    public void showOrHideToolBarLogo(boolean show) {
-        if (show) {
-//            toolbar.setLogo(R.mipmap.ic_top);
-        } else {
-            toolbar.setLogo(null);
-        }
-    }
 
     /**
      * 设置兼容4.4版本 状态栏颜色改变成和5.0效果差不多
@@ -135,9 +63,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         StatusBarCompat.compat(this, getResources().getColor(colorId));
     }
 
-
-    public abstract String returnToolBarTitle();
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -146,13 +71,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-    }
-
-    private void setTitle() {
-        if (toolbar != null) {
-            String title = returnToolBarTitle();
-            toolbar.setTitle(title);
-        }
     }
 
 
@@ -164,10 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setTitle();
         TDevice.hideSoftKeyboard(getCurrentFocus());
-//        setStatusBarCompat();
-
     }
 
     @Override
@@ -176,14 +91,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         AppManager.getAppManager().removeActivity(this);
     }
 
-
     /**
      * 设置布局前的操作
      */
     protected void onBeforeSetContentLayout() {
     }
 
-    public Toolbar getToolbar() {
-        return toolbar;
-    }
 }

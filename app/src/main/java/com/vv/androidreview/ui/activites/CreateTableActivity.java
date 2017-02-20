@@ -19,29 +19,25 @@
 
 package com.vv.androidreview.ui.activites;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
 import com.vv.androidreview.entity.Content;
 import com.vv.androidreview.entity.Point;
 import com.vv.androidreview.entity.Suggest;
 import com.vv.androidreview.entity.Test;
 import com.vv.androidreview.entity.Unit;
-
-import org.w3c.dom.Text;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.SaveListener;
 
-public class CreateTableActivity extends BaseActivity {
+public class CreateTableActivity extends BaseToolbarActivity {
     public static final int PB_STEP = 20;
     private TextView mBtCreateTable;
     private ProgressBar mProgressBar;
@@ -49,8 +45,7 @@ public class CreateTableActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_table);
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true,getString(R.string.creat_table));
 //        initData();
         mBtCreateTable = (TextView) findViewById(R.id.bt_create);
         mProgressBar = (ProgressBar) findViewById(R.id.progressbar);
@@ -130,11 +125,6 @@ public class CreateTableActivity extends BaseActivity {
             }
         });
 
-    }
-
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.creat_table);
     }
 
     public void initTest() {

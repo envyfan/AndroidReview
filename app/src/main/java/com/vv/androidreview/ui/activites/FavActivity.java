@@ -33,13 +33,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
+import com.vv.androidreview.cache.CacheHelper;
 import com.vv.androidreview.entity.Test;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 import com.vv.androidreview.ui.fragment.TestFragment;
 import com.vv.androidreview.ui.view.AnswerItem;
-import com.vv.androidreview.cache.CacheHelper;
 
-public class FavActivity extends BaseActivity {
+public class FavActivity extends BaseToolbarActivity {
     public static final String FAV_KEY="fav_key";
     //当前题目
     private Test mTest;
@@ -63,8 +63,7 @@ public class FavActivity extends BaseActivity {
         mRootView = LayoutInflater.from(this).inflate(R.layout.activity_fav,null);
         setContentView(mRootView);
         initArgument();
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true,getString(R.string.my_fav));
         creatView();
         setButtonListener();
         initData();
@@ -271,11 +270,6 @@ public class FavActivity extends BaseActivity {
                 scroll.smoothScrollTo(0, offset);
             }
         });
-    }
-
-    @Override
-    public String returnToolBarTitle() {
-        return getString(R.string.my_fav);
     }
 
     private void setAnswerItemEnabled(boolean enabled) {

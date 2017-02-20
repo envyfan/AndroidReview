@@ -24,13 +24,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.base.BaseActivity;
 import com.vv.androidreview.entity.Point;
+import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 import com.vv.androidreview.ui.fragment.FavListFragment;
 import com.vv.androidreview.ui.fragment.ReviewContentListFragment;
 import com.vv.androidreview.ui.fragment.ReviewFragment;
 
-public class ListActivity extends BaseActivity {
+public class ListActivity extends BaseToolbarActivity {
     public static final String CONTENT_TYPE_KEY = "content_type_key";
 
     public static final int LIST_TYPE_REVIEW_CONTENT = 1;
@@ -48,8 +48,7 @@ public class ListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         initArguments();
-        initToolBar();
-        showOrHideToolBarNavigation(true);
+        initToolBar(true,getToolBarTitle());
         initView();
         setStatusBarCompat();
     }
@@ -100,8 +99,7 @@ public class ListActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public String returnToolBarTitle() {
+    public String getToolBarTitle() {
         switch (mType) {
             case LIST_TYPE_REVIEW_CONTENT:
                 return mPoint.getName();
