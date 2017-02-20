@@ -57,6 +57,8 @@ dependencies {
     compile 'com.github.channguyen:rsv:1.0.1'
     //开关View
     compile 'com.7heaven.ioswidget:iosswitch:0.5'
+    // 底部导航栏
+    compile 'com.roughike:bottom-bar:1.4.0.1'
 
     //异常捕获(调试用 参考drakeet的开源项目)
     //debugCompile 'me.drakeet.library:crashwoodpecker:0.9.81'

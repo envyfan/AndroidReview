@@ -37,7 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activites.AppStartActivity"
+            android:name=".mvp.main.AppStartActivity"
             android:theme="@style/Theme.AppStartLoad">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activites.MainActivity" />
+        <activity android:name=".mvp.main.MainActivity" />
         <activity android:name=".ui.activites.ListActivity" />
         <activity android:name=".ui.activites.DetailActivity" />
         <activity android:name=".ui.activites.FavActivity" />

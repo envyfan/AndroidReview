@@ -40,7 +40,7 @@ import com.vv.androidreview.base.BaseFragment;
 import com.vv.androidreview.entity.Test;
 import com.vv.androidreview.cache.ReadCacheAsyncTask;
 import com.vv.androidreview.cache.SaveCacheAsyncTask;
-import com.vv.androidreview.ui.activites.MainActivity;
+import com.vv.androidreview.mvp.main.MainActivity;
 import com.vv.androidreview.ui.view.AnswerItem;
 import com.vv.androidreview.ui.view.LoadingLayout;
 import com.vv.androidreview.cache.CacheHelper;

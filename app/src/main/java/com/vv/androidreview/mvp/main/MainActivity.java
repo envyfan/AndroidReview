@@ -17,7 +17,7 @@
  * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vv.androidreview.ui.activites;
+package com.vv.androidreview.mvp.main;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

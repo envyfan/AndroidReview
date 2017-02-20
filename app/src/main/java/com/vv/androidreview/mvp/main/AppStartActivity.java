@@ -17,9 +17,8 @@
  * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vv.androidreview.ui.activites;
+package com.vv.androidreview.mvp.main;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,22 +26,15 @@ import android.os.Handler;
 
 import com.vv.androidreview.R;
 import com.vv.androidreview.base.system.AppManager;
+import com.vv.androidreview.mvp.config.AppConfig;
+import com.vv.androidreview.ui.activites.PermissionsActivity;
 import com.vv.androidreview.utils.PermissionsChecker;
 
 
 public class AppStartActivity extends Activity {
 
-    private static final int SPLASH_DISPLAY_LENGTH = 2000; // 休眠2秒
-
     private static final int REQUEST_CODE = 0; // 请求码
-
-    // 所需的全部权限
-    static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
     private PermissionsChecker mPermissionsChecker; // 权限检测器
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +45,8 @@ public class AppStartActivity extends Activity {
         if (aty != null && !aty.isFinishing()) {
             finish();
         }
-        setContentView(R.layout.activity_app_start);
 
+        setContentView(R.layout.activity_app_start);
         mPermissionsChecker = new PermissionsChecker(this);
 
     }
@@ -63,9 +55,9 @@ public class AppStartActivity extends Activity {
     protected void onResume() {
         super.onResume();
         // 缺少权限时, 进入权限配置页面
-        if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
-            PermissionsActivity.startActivityForResult(this, REQUEST_CODE, PERMISSIONS);
-        }else{
+        if (mPermissionsChecker.lacksPermissions(AppConfig.BaseConfig.SENSITIVE_PERMISSIONS)) {
+            PermissionsActivity.startActivityForResult(this, REQUEST_CODE, AppConfig.BaseConfig.SENSITIVE_PERMISSIONS);
+        } else {
             enterMainDelay();
         }
     }
@@ -85,7 +77,7 @@ public class AppStartActivity extends Activity {
             public void run() {
                 redirectTo();
             }
-        }, SPLASH_DISPLAY_LENGTH);
+        }, AppConfig.BaseConfig.APP_START_DELAY_TIME);
     }
 
     /**
