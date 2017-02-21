@@ -20,6 +20,7 @@
 package com.vv.androidreview.ui.fragment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -64,6 +65,15 @@ public class ReviewFragment extends BasePutToRefreshFragment<ReviewListAdapterGV
     public ReviewListAdapterGV getAdapter() {
         mReviewListAdapter = new ReviewListAdapterGV(getContext());
         return mReviewListAdapter;
+    }
+
+    public static ReviewFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        ReviewFragment fragment = new ReviewFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override

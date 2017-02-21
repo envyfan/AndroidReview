@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
   ~
   ~ This file is part of AndroidReview (Android面试复习)
@@ -16,8 +15,7 @@
   ~
   ~  You should have received a copy of the GNU General Public License
   ~ along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vv.androidreview">
 
@@ -55,7 +53,8 @@
         <activity android:name=".ui.activites.PermissionsActivity" />
         <activity android:name=".ui.activites.SettingCacheActivity" />
         <activity android:name=".ui.activites.CreateTableActivity" />
-        <activity android:name=".ui.activites.VersionNoteActivity"></activity>
+        <activity android:name=".ui.activites.VersionNoteActivity" />
+        <activity android:name=".mvp.main.Main2Activity" />
     </application>
 
 </manifest>

@@ -18,6 +18,4 @@ package com.vv.androidreview.mvp.base;
 
 public interface BasePresenter {
 
-    void start();
-
 }
