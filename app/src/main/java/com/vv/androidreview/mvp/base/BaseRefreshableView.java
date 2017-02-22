@@ -8,7 +8,7 @@ import android.view.ViewGroup;
  * Description：
  */
 
-public interface BaseRefreshableView<T, R extends ViewGroup> extends BaseView<T> {
+public interface BaseRefreshableView<T, R extends ViewGroup>{
 
-    void setRefreshView(R refreshView);
+    R getRefreshView();
 }

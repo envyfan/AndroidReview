@@ -26,6 +26,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vv.androidreview.R;
+
 
 /**
  * Author: Vv on 2015/8/12 17:26
@@ -46,7 +48,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mRootView == null) {
-            mRootView = onCreateRootView(inflater, container, savedInstanceState);
+            mRootView = LayoutInflater.from(getContext()).inflate(getLayoutId(), null, false);
+            onCreateRootView(inflater, container, savedInstanceState);
         }
         //缓存的mRootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个mRootView已经有parent的错误。
         ViewGroup parent = (ViewGroup) mRootView.getParent();
@@ -56,6 +59,11 @@ public abstract class BaseFragment extends Fragment {
         return mRootView;
     }
 
-    public abstract View onCreateRootView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+    public abstract void onCreateRootView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
+    public View getRootView() {
+        return mRootView;
+    }
+
+    public abstract int getLayoutId();
 }

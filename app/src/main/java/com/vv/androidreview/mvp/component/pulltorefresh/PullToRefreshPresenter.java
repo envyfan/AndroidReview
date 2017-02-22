@@ -14,5 +14,8 @@ public class PullToRefreshPresenter implements PullToRefreshContract.Presenter {
         this.refreshableView = refreshableView;
     }
 
-
+    @Override
+    public void onRefresh() {
+        // TODO:  model to get Data
+    }
 }
