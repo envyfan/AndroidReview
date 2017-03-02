@@ -50,6 +50,8 @@ public class CacheHelper {
     public final static String FAV = "fav.pref";
     public final static String GROUP_LIST_CACHE_KEY = "grup_list";
     public final static String CONTENT_LIST_CACHE_KEY = "content_list_";
+    public final static String GROUP_UNIT_LIST_CACHE_KEY = "grup_unit_list";
+    public final static String GROUP_POINT_LIST_CACHE_KEY = "grup_point_list";
     public final static String CONTENT_CACHE_KEY = "content_";
     public final static String TEST = "test_";
 

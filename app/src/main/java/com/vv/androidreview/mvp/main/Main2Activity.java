@@ -65,8 +65,8 @@ public class Main2Activity extends BaseToolbarActivity {
                             reviewFragmentEx = ReviewFragmentEx.newInstance();
                             addFragmentToActivity(reviewFragmentEx,R.id.frame_content,TAG_REVIEW);
                         }
-                        PullToRefreshPresenter pullToRefreshPresenter = new PullToRefreshPresenter(reviewFragmentEx);
-                        reviewFragmentEx.setRefreshPresenter(pullToRefreshPresenter);
+//                        PullToRefreshPresenter pullToRefreshPresenter = new PullToRefreshPresenter(reviewFragmentEx);
+//                        reviewFragmentEx.setRefreshPresenter(pullToRefreshPresenter);
                         break;
                     case R.id.bb_menu_exam:
 //                        ExamFragment examFragment = (ExamFragment) mFragmentManager.findFragmentByTag(TAG_EXAM);

@@ -2,7 +2,9 @@ package com.vv.androidreview.mvp.component.pulltorefresh;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.BaseFragment;
@@ -13,22 +15,20 @@ import com.vv.androidreview.mvp.base.BaseFragment;
  * Description：
  */
 
-public abstract class PullToRefreshFragment extends BaseFragment implements PullToRefreshContract.RefreshableView {
+public abstract class PullToRefreshFragment extends BaseFragment {
 
     private SwipeRefreshLayout refreshLayout;
 
-    private PullToRefreshContract.Presenter refreshPresenter;
-
     @Override
-    public SwipeRefreshLayout getRefreshView() {
-        return refreshLayout;
+    public void onCreateRootView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        initRefreshLayout();
     }
 
-    public void initRefreshLayout(int resId) {
+    private void initRefreshLayout() {
         View rootView = getRootView();
 
         if (rootView != null) {
-            refreshLayout = (SwipeRefreshLayout) rootView.findViewById(resId);
+            refreshLayout = (SwipeRefreshLayout) rootView.findViewById(getRefreshLayoutId());
         }
 
         if (refreshLayout != null) {
@@ -38,14 +38,17 @@ public abstract class PullToRefreshFragment extends BaseFragment implements Pull
             refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    refreshPresenter.onRefresh();
+                    onDataRefresh();
                 }
             });
         }
     }
 
-    @Override
-    public void setRefreshPresenter(PullToRefreshContract.Presenter presenter) {
-        this.refreshPresenter = presenter;
+    public SwipeRefreshLayout getRefreshView() {
+        return refreshLayout;
     }
+
+    public abstract int getRefreshLayoutId();
+
+    public abstract void onDataRefresh();
 }

@@ -6,16 +6,17 @@ package com.vv.androidreview.mvp.component.pulltorefresh;
  * Description：
  */
 
-public class PullToRefreshPresenter implements PullToRefreshContract.Presenter {
+public class PullToRefreshPresenter {
+//public class PullToRefreshPresenter implements PullToRefreshContract.Presenter {
 
-    private PullToRefreshContract.RefreshableView refreshableView;
-
-    public PullToRefreshPresenter(PullToRefreshContract.RefreshableView refreshableView) {
-        this.refreshableView = refreshableView;
-    }
-
-    @Override
-    public void onRefresh() {
-        // TODO:  model to get Data
-    }
+//    private PullToRefreshContract.RefreshableView refreshableView;
+//
+//    public PullToRefreshPresenter(PullToRefreshContract.RefreshableView refreshableView) {
+//        this.refreshableView = refreshableView;
+//    }
+//
+//    @Override
+//    public void onRefresh() {
+//        // TODO:  model to get Data
+//    }
 }

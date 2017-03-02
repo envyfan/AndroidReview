@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.vv.androidreview.mvp.data.entity.Content;
 import com.vv.androidreview.mvp.data.entity.Point;
+import com.vv.androidreview.mvp.data.entity.Unit;
 
 import java.util.List;
 
@@ -31,4 +32,15 @@ public interface ReviewDocDataSource {
      */
     void getMoreContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, int currentPage, int currentItemCount);
 
+    /** 获取单元列表
+     * @param loadUnitsCallback 回调
+     * @param isNeedCache 是否需要缓存 false 请求远程服务器 true读取缓存 具体的local和remote实现 忽略此参数
+     */
+    void getUnits(@NonNull OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isNeedCache);
+
+    /** 获取知识点列表
+     * @param loadPointsCallback 回调
+     *@param isNeedCache 是否需要缓存 false 请求远程服务器 true读取缓存 具体的local和remote实现 忽略此参数
+     */
+    void getPoints(@NonNull OnLoadDataCallBack<List<Point>> loadPointsCallback,Boolean isNeedCache);
 }

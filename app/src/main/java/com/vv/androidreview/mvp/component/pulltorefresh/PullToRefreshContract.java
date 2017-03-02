@@ -13,11 +13,11 @@ import com.vv.androidreview.mvp.base.BaseRefreshableView;
 
 public interface PullToRefreshContract {
 
-    interface RefreshableView extends BaseRefreshableView<PullToRefreshContract.Presenter, SwipeRefreshLayout> {
-        void setRefreshPresenter(PullToRefreshContract.Presenter refreshPresenter);
-    }
-
-    interface Presenter extends BasePresenter {
-        void onRefresh();
-    }
+//    interface RefreshableView extends BaseRefreshableView<PullToRefreshContract.Presenter, SwipeRefreshLayout> {
+//        void setRefreshPresenter(PullToRefreshContract.Presenter refreshPresenter);
+//    }
+//
+//    interface Presenter extends BasePresenter {
+//        void onRefresh();
+//    }
 }
