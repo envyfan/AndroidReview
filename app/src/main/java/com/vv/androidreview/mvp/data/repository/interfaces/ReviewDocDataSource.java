@@ -18,9 +18,9 @@ public interface ReviewDocDataSource {
      * 获取Contents列表(先从缓存拿，没有则从网络拿)
      * @param loadContentsCallback 加载Content列表回调处理
      * @param point 对应的知识点
-     * @param isNeedCache 是否需要缓存 (具体 local 和 remote可以传null)
+     * @param isReadCache 是否需要缓存 (具体 local 和 remote可以传null)
      */
-    void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isNeedCache);
+    void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isReadCache);
 
     /**
      * 获取Contents列表(从网上拿，不拿缓存，加载更多)
@@ -34,13 +34,13 @@ public interface ReviewDocDataSource {
 
     /** 获取单元列表
      * @param loadUnitsCallback 回调
-     * @param isNeedCache 是否需要缓存 false 请求远程服务器 true读取缓存 具体的local和remote实现 忽略此参数
+     * @param isReadCache 是否需要缓存 false 请求远程服务器 true读取缓存 具体的local和remote实现 忽略此参数
      */
-    void getUnits(@NonNull OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isNeedCache);
+    void getUnits(@NonNull OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isReadCache);
 
     /** 获取知识点列表
      * @param loadPointsCallback 回调
-     *@param isNeedCache 是否需要缓存 false 请求远程服务器 true读取缓存 具体的local和remote实现 忽略此参数
+     *@param isReadCache 是否需要缓存 false 请求远程服务器 true读取缓存 具体的local和remote实现 忽略此参数
      */
-    void getPoints(@NonNull OnLoadDataCallBack<List<Point>> loadPointsCallback,Boolean isNeedCache);
+    void getPoints(@NonNull OnLoadDataCallBack<List<Point>> loadPointsCallback,Boolean isReadCache);
 }

@@ -1,14 +1,14 @@
 package com.vv.androidreview.mvp.base;
 
-import android.view.ViewGroup;
-
 /**
  * Author：Vv on .
  * Mail：envyfan@qq.com
  * Description：
  */
 
-public interface BaseRefreshableView<T, R extends ViewGroup>{
+public interface BaseRefreshableView<T> extends BaseView<T>{
 
-    R getRefreshView();
+    void completeLoading(int statusType);
+
+    void showRefreshResultResponse(String msg);
 }

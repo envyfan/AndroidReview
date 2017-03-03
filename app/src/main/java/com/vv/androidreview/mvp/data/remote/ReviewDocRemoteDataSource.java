@@ -11,7 +11,8 @@ import com.vv.androidreview.mvp.data.entity.Point;
 import com.vv.androidreview.mvp.data.entity.Unit;
 import com.vv.androidreview.mvp.data.repository.interfaces.OnLoadDataCallBack;
 import com.vv.androidreview.mvp.data.repository.interfaces.ReviewDocDataSource;
-import com.vv.androidreview.ui.fragment.ReviewFragment;
+import com.vv.androidreview.mvp.system.CodeConfig;
+import com.vv.androidreview.mvp.system.StaticValues;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,7 +27,7 @@ import cn.bmob.v3.listener.FindListener;
  * Description：
  */
 
-public class ReviewDocRemoteDataSource implements ReviewDocDataSource{
+public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
     private Context mContext;
 
     public ReviewDocRemoteDataSource(Context mContext) {
@@ -34,7 +35,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource{
     }
 
     @Override
-    public void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isNeedCache) {
+    public void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isReadCache) {
 
     }
 
@@ -47,10 +48,10 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource{
      * 获取单元列表
      *
      * @param loadUnitsCallback 回调
-     * @param isNeedCache 是否需要缓存 (具体 local 和 remote可以传null)
+     * @param isReadCache       是否需要缓存 (具体 local 和 remote可以传null)
      */
     @Override
-    public void getUnits(@NonNull final OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isNeedCache) {
+    public void getUnits(@NonNull final OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isReadCache) {
         //初始化Bmob查询类
         BmobQuery<Unit> query = new BmobQuery<>();
         //执行查询，查询单元表 取出所有单元
@@ -63,23 +64,24 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource{
                 loadUnitsCallback.onSuccess(unitList);
 
                 //有数据才保存缓存，把原来的缓存覆盖
-                if(unitList != null && unitList.size() > 0){
+                if (unitList != null && unitList.size() > 0) {
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            try{
-                                CacheHelper.saveObject(mContext,(Serializable)unitList,CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
-                            }catch(Exception e){
+                            try {
+                                CacheHelper.saveObject(mContext, (Serializable) unitList, CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
+                            } catch (Exception e) {
                                 Logger.e("保存单元缓存失败");
                             }
                         }
                     });
                 }
             }
+
             @Override
             public void onError(int i, String s) {
-                loadUnitsCallback.onFail(1,"");
+                loadUnitsCallback.onFail(CodeConfig.Error.API, StaticValues.REQUEST_ERROR);
             }
         });
     }
@@ -88,10 +90,10 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource{
      * 获取知识点列表
      *
      * @param loadPointsCallback 回调
-     * @param isNeedCache 是否需要缓存 (具体 local 和 remote可以传null)
+     * @param isReadCache        是否需要缓存 (具体 local 和 remote可以传null)
      */
     @Override
-    public void getPoints(@NonNull final OnLoadDataCallBack<List<Point>> loadPointsCallback, Boolean isNeedCache) {
+    public void getPoints(@NonNull final OnLoadDataCallBack<List<Point>> loadPointsCallback, Boolean isReadCache) {
         //执行查询，查询知识点表 取出所有知识点
         BmobQuery<Point> query = new BmobQuery<>();
 //        query.setLimit(ReviewFragment.LIMIT);
@@ -102,7 +104,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource{
                 loadPointsCallback.onSuccess(pointList);
 
                 //有数据才保存缓存，把原来的缓存覆盖
-                if(pointList != null && pointList.size() > 0) {
+                if (pointList != null && pointList.size() > 0) {
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
@@ -119,7 +121,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource{
 
             @Override
             public void onError(int i, String s) {
-                loadPointsCallback.onFail(1,"");
+                loadPointsCallback.onFail(CodeConfig.Error.API, StaticValues.REQUEST_ERROR);
             }
         });
     }

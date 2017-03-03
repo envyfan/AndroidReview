@@ -9,9 +9,8 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.BaseToolbarActivity;
-import com.vv.androidreview.mvp.component.pulltorefresh.PullToRefreshPresenter;
 import com.vv.androidreview.mvp.review.ReviewFragmentEx;
-import com.vv.androidreview.ui.fragment.ReviewFragment;
+import com.vv.androidreview.mvp.review.ReviewPresenter;
 import com.vv.androidreview.utils.DoubleClickExitHelper;
 
 public class Main2Activity extends BaseToolbarActivity {
@@ -65,6 +64,8 @@ public class Main2Activity extends BaseToolbarActivity {
                             reviewFragmentEx = ReviewFragmentEx.newInstance();
                             addFragmentToActivity(reviewFragmentEx,R.id.frame_content,TAG_REVIEW);
                         }
+                        ReviewPresenter reviewPresenter = new ReviewPresenter(Main2Activity.this,reviewFragmentEx);
+                        reviewFragmentEx.setPresenter(reviewPresenter);
 //                        PullToRefreshPresenter pullToRefreshPresenter = new PullToRefreshPresenter(reviewFragmentEx);
 //                        reviewFragmentEx.setRefreshPresenter(pullToRefreshPresenter);
                         break;

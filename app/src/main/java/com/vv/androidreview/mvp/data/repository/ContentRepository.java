@@ -24,14 +24,14 @@ import java.util.List;
 public class ContentRepository implements ReviewDocDataSource {
 
     private Context mContext;
-    private ReviewDocDataSource localDataSource;
-    private ReviewDocDataSource remoteDataSource;
+    private ReviewDocDataSource mLocalDataSource;
+    private ReviewDocDataSource mRemoteDataSource;
 
 
     public ContentRepository(Context mContext) {
         this.mContext = mContext;
-        this.localDataSource = new ReviewDocLocalDataSource(mContext);
-        this.remoteDataSource = new ReviewDocRemoteDataSource(mContext);
+        this.mLocalDataSource = new ReviewDocLocalDataSource(mContext);
+        this.mRemoteDataSource = new ReviewDocRemoteDataSource(mContext);
     }
 
     /**
@@ -39,28 +39,28 @@ public class ContentRepository implements ReviewDocDataSource {
      *
      * @param loadContentsCallback 加载Content列表回调处理
      * @param point                对应的知识点
-     * @param isNeedCache          是否需要缓存 (具体 local 和 remote可以传null)
+     * @param isReadCache          是否需要缓存 (具体 local 和 remote可以传null)
      */
     @Override
-    public void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isNeedCache) {
+    public void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isReadCache) {
         boolean isHasCache = false;
 
         if (point != null) {
             isHasCache = CacheHelper.isExistDataCache(mContext, CacheHelper.CONTENT_LIST_CACHE_KEY + point.getObjectId());
         }
 
-        if (isHasCache && isNeedCache) {
+        if (isReadCache && isHasCache) {
             Logger.d("has ContentList Cache");
-            localDataSource.getContents(loadContentsCallback, point, null);
+            mLocalDataSource.getContents(loadContentsCallback, point, null);
             return;
         }
 
         //本地没数据则向网络请求数据
-        if (isNeedCache) {
+        if (isReadCache) {
             Logger.d("no ContentList Cache");
         }
 
-        remoteDataSource.getContents(loadContentsCallback, point, null);
+        mRemoteDataSource.getContents(loadContentsCallback, point, null);
     }
 
     /**
@@ -73,54 +73,54 @@ public class ContentRepository implements ReviewDocDataSource {
      */
     @Override
     public void getMoreContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, int currentPage, int currentItemCount) {
-        remoteDataSource.getMoreContents(loadContentsCallback, point, currentPage, currentItemCount);
+        mRemoteDataSource.getMoreContents(loadContentsCallback, point, currentPage, currentItemCount);
     }
 
     /**
      * 获取单元列表
      *
      * @param loadUnitsCallback 回调
-     * @param isNeedCache        是否需要缓存 false 请求远程服务器 true 具体的local和remote实现 忽略此参数
+     * @param isReadCache       是否需要缓存 false 请求远程服务器 true 具体的local和remote实现 忽略此参数
      */
     @Override
-    public void getUnits(@NonNull OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isNeedCache) {
-        boolean hasCache = CacheHelper.isExistDataCache(mContext,CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
+    public void getUnits(@NonNull OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isReadCache) {
+        boolean hasCache = CacheHelper.isExistDataCache(mContext, CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
         //假如有缓存则读缓存
-        if(hasCache && isNeedCache){
+        if (hasCache && isReadCache) {
             Logger.d("has Units Cache");
-            localDataSource.getUnits(loadUnitsCallback,null);
+            mLocalDataSource.getUnits(loadUnitsCallback, null);
             return;
         }
 
         //本地没数据则向网络请求数据
-        if(isNeedCache) {
+        if (isReadCache) {
             Logger.d("no Units Cache");
         }
         //从网络获取数据
-        remoteDataSource.getUnits(loadUnitsCallback,null);
+        mRemoteDataSource.getUnits(loadUnitsCallback, null);
     }
 
     /**
      * 获取知识点列表
      *
      * @param loadPointsCallback 回调
-     * @param isNeedCache          是否需要缓存 false 请求远程服务器 true 具体的local和remote实现 忽略此参数
+     * @param isReadCache        是否需要缓存 false 请求远程服务器 true 具体的local和remote实现 忽略此参数
      */
     @Override
-    public void getPoints(@NonNull OnLoadDataCallBack<List<Point>> loadPointsCallback, Boolean isNeedCache) {
-        boolean hasCache = CacheHelper.isExistDataCache(mContext,CacheHelper.GROUP_POINT_LIST_CACHE_KEY);
+    public void getPoints(@NonNull OnLoadDataCallBack<List<Point>> loadPointsCallback, Boolean isReadCache) {
+        boolean hasCache = CacheHelper.isExistDataCache(mContext, CacheHelper.GROUP_POINT_LIST_CACHE_KEY);
         //假如有缓存则读缓存
-        if(hasCache && isNeedCache){
+        if (hasCache && isReadCache) {
             Logger.d("has points Cache");
-            localDataSource.getPoints(loadPointsCallback,null);
+            mLocalDataSource.getPoints(loadPointsCallback, null);
             return;
         }
 
         //本地没数据则向网络请求数据
-        if(isNeedCache) {
+        if (isReadCache) {
             Logger.d("no points Cache");
         }
         //从网络获取数据
-        remoteDataSource.getPoints(loadPointsCallback,null);
+        mRemoteDataSource.getPoints(loadPointsCallback, null);
     }
 }

@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.BaseFragment;
+import com.vv.androidreview.mvp.system.CodeConfig;
+import com.vv.androidreview.ui.view.LoadingLayout;
 
 /**
  * Author：Vv on .
@@ -17,38 +20,65 @@ import com.vv.androidreview.mvp.base.BaseFragment;
 
 public abstract class PullToRefreshFragment extends BaseFragment {
 
-    private SwipeRefreshLayout refreshLayout;
+    private SwipeRefreshLayout mRefreshLayout;
+    private LoadingLayout mLoadingLayout;
 
     @Override
     public void onCreateRootView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initRefreshLayout();
+        initLoadingLayout();
+    }
+
+    private void initLoadingLayout() {
+        View rootView = getRootView();
+
+        if (rootView != null) {
+            mLoadingLayout = (LoadingLayout) rootView.findViewById(getLoadingLayoutId());
+            View view = mLoadingLayout.findViewById(R.id.img_refresh);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Logger.e("onclick");
+                    mLoadingLayout.setLoadingLayout(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_LOADING);
+                    onLoadData();
+                }
+            });
+        }
     }
 
     private void initRefreshLayout() {
         View rootView = getRootView();
 
         if (rootView != null) {
-            refreshLayout = (SwipeRefreshLayout) rootView.findViewById(getRefreshLayoutId());
+            mRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(getRefreshLayoutId());
         }
 
-        if (refreshLayout != null) {
+        if (mRefreshLayout != null) {
 
-            refreshLayout.setColorSchemeResources(R.color.theme_color);
+            mRefreshLayout.setColorSchemeResources(R.color.theme_color);
 
-            refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    onDataRefresh();
+                    onPullToRefresh();
                 }
             });
         }
     }
 
-    public SwipeRefreshLayout getRefreshView() {
-        return refreshLayout;
+    public LoadingLayout getLoadingLayout() {
+        return mLoadingLayout;
+    }
+
+    public SwipeRefreshLayout getRefreshLayout() {
+        return mRefreshLayout;
     }
 
     public abstract int getRefreshLayoutId();
 
-    public abstract void onDataRefresh();
+    public abstract int getLoadingLayoutId();
+
+    public abstract void onPullToRefresh();
+
+    public abstract void onLoadData();
 }
