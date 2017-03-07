@@ -31,18 +31,18 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
             @Override
             public void onSuccess(List<Point> data) {
                 if (isAutoRequest) {
-                    mReviewView.completeLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_HIDE);
+                    mReviewView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_HIDE);
                 } else {
-                    mReviewView.showRefreshResultResponse(StaticValues.REQUEST_SUCCESS);
+                    mReviewView.completePullToRefresh(StaticValues.REQUEST_SUCCESS);
                 }
             }
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
                 if (isAutoRequest) {
-                    mReviewView.completeLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_ERROR);
+                    mReviewView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_ERROR);
                 } else {
-                    mReviewView.showRefreshResultResponse(errorMsg);
+                    mReviewView.completePullToRefresh(errorMsg);
                 }
             }
         }, isReadCache);

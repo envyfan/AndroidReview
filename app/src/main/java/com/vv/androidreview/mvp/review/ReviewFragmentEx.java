@@ -64,13 +64,13 @@ public class ReviewFragmentEx extends PullToRefreshFragment implements ReviewCon
     }
 
     @Override
-    public void completeLoading(int statusType) {
-        getLoadingLayout().setLoadingLayout(statusType);
+    public void completeDataLoading(int loadingLayoutStatusType) {
+        getLoadingLayout().setLoadingLayout(loadingLayoutStatusType);
     }
 
 
     @Override
-    public void showRefreshResultResponse(String msg) {
+    public void completePullToRefresh(String msg) {
         getRefreshLayout().setRefreshing(false);
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }

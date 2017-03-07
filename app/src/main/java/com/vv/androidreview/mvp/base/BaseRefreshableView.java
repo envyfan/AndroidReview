@@ -8,7 +8,15 @@ package com.vv.androidreview.mvp.base;
 
 public interface BaseRefreshableView<T> extends BaseView<T>{
 
-    void completeLoading(int statusType);
+    /**
+     * 完成数据加载（可能从本地加载也可能从网络加载 ）
+     * @param loadingLayoutStatusType  loadingLayout 状态
+     */
+    void completeDataLoading(int loadingLayoutStatusType);
 
-    void showRefreshResultResponse(String msg);
+    /**
+     * 完成下来刷新
+     * @param msg
+     */
+    void completePullToRefresh(String msg);
 }
