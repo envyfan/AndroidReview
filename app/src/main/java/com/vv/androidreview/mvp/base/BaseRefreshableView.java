@@ -15,8 +15,8 @@ public interface BaseRefreshableView<T> extends BaseView<T>{
     void completeDataLoading(int loadingLayoutStatusType);
 
     /**
-     * 完成下来刷新
-     * @param msg
+     * 完成下拉刷新
+     * @param msg complete message
      */
     void completePullToRefresh(String msg);
 }
