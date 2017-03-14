@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.orhanobut.logger.Logger;
 import com.vv.androidreview.cache.CacheHelper;
+import com.vv.androidreview.mvp.config.AppConfig;
 import com.vv.androidreview.mvp.data.entity.Content;
 import com.vv.androidreview.mvp.data.entity.Point;
 import com.vv.androidreview.mvp.data.entity.Unit;
@@ -56,7 +57,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
         BmobQuery<Unit> query = new BmobQuery<>();
         //执行查询，查询单元表 取出所有单元
         query.order("score,sort");
-        query.setLimit(StaticValues.HOME_SCREEN_LIST_LIMIT);
+        query.setLimit(AppConfig.BaseConfig.HOME_SCREEN_LIST_LIMIT);
         query.findObjects(mContext, new FindListener<Unit>() {
             @Override
             public void onSuccess(final List<Unit> unitList) {
