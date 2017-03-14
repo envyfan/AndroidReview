@@ -84,7 +84,7 @@ public class AppStartActivity extends Activity {
      * 跳转到主Activity
      */
     private void redirectTo() {
-        Intent intent = new Intent(this, Main2Activity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

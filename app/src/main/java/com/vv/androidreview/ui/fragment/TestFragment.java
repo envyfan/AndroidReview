@@ -23,7 +23,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -126,7 +125,7 @@ public class TestFragment extends BaseFragment {
     private void creatViews() {
 
         //设置已做题目统计数
-        mParentActivity.setTextCount(0);
+//        mParentActivity.setTextCount(0);
 
         //数据加载loading 布局
         mLoadingLayout = (LoadingLayout) mRootView.findViewById(R.id.ly_loading);
@@ -169,11 +168,11 @@ public class TestFragment extends BaseFragment {
                 if (CacheHelper.getFav(mTest.getTestId() + "") == mTest.getTestId()) {
                     mFAB.setImageResource(R.mipmap.icon_fav);
                     CacheHelper.removeToFav(mTest.getTestId() + "");
-                    Snackbar.make(mParentActivity.getRootView(), "取消收藏", Snackbar.LENGTH_SHORT).show();
+//                    Snackbar.make(mParentActivity.getRootView(), "取消收藏", Snackbar.LENGTH_SHORT).show();
                 } else {
                     mFAB.setImageResource(R.mipmap.icon_fav_select);
                     CacheHelper.putToFav(mTest.getTestId() + "", mTest.getTestId());
-                    Snackbar.make(mParentActivity.getRootView(), "收藏成功", Snackbar.LENGTH_SHORT).show();
+//                    Snackbar.make(mParentActivity.getRootView(), "收藏成功", Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -201,7 +200,7 @@ public class TestFragment extends BaseFragment {
                     resetLayout();
                 }
                 //顶部toolbar做题总数统计
-                mParentActivity.setTextCount(++sTestCount);
+//                mParentActivity.setTextCount(++sTestCount);
             }
         });
         //显示答案

@@ -126,7 +126,7 @@ public class ReviewContentListFragment extends BasePutToRefreshFragment<ContentL
     public void initArguments() {
         if (getArguments() != null) {
             Bundle bundle = getArguments();
-            mPoint = (Point) bundle.getSerializable(ReviewFragment.ARGUMENT_POINT_KEY);
+//            mPoint = (Point) bundle.getSerializable(ReviewFragment.ARGUMENT_POINT_KEY);
         }
     }
 

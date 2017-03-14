@@ -1,131 +1,114 @@
-/*
- * Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
- *
- * This file is part of AndroidReview (Android面试复习)
- *
- * AndroidReview is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- *  AndroidReview is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package com.vv.androidreview.mvp.main;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTabHost;
-import android.util.TypedValue;
+import android.os.PersistableBundle;
+import android.support.annotation.IdRes;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TabHost;
-import android.widget.TextView;
 
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabClickListener;
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.BaseToolbarActivity;
-import com.vv.androidreview.ui.fragment.Indicator;
+import com.vv.androidreview.mvp.review.ReviewFragmentEx;
+import com.vv.androidreview.mvp.review.ReviewPresenter;
 import com.vv.androidreview.utils.DoubleClickExitHelper;
 
 public class MainActivity extends BaseToolbarActivity {
 
-    private DoubleClickExitHelper mDoubleClickExit;
-    private FragmentTabHost mFragmentTabHost;
-    protected TextView mCount;
-    private View mRootView;
+    private static final String TAG_REVIEW = "tag_review";
+    private static final String TAG_EXAM = "tag_exam";
+    private static final String TAG_SETTING = "tag_setting";
 
+    private BottomBar mBottomBar;
+
+    private DoubleClickExitHelper mDoubleClickExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRootView = LayoutInflater.from(this).inflate(R.layout.activity_main,null);
-        setContentView(mRootView);
+        setContentView(R.layout.activity_main);
+        initToolBar(false, getString(R.string.app_name));
 
-        initToolBar(false,getString(R.string.app_name));
-        initView();
-        setStatusBarCompat();
-    }
-
-    private void initView() {
-        //测试栏目的题目统计TextView
-        mCount = (TextView) findViewById(R.id.tv_count);
+        //初始化底部菜单导航条
+        initBottomMenu(savedInstanceState);
+        //双击退出帮助类
         mDoubleClickExit = new DoubleClickExitHelper(this);
 
-        Indicator[] indicators = Indicator.values();
-        mFragmentTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-        mFragmentTabHost.setup(getApplicationContext(), getSupportFragmentManager(), R.id.realtabcontent);
+    }
 
-        //初始化Tab
-        for (int i = 0; i < indicators.length; i++){
-            TabHost.TabSpec tabSpec = mFragmentTabHost.newTabSpec(getString(indicators[i].getResName()));
-            tabSpec.setIndicator(getIndicatorView(indicators[i]));
-            mFragmentTabHost.addTab(tabSpec, indicators[i].getClz(), null);
-        }
-        //去除底部按钮之间的分割线
-        if (android.os.Build.VERSION.SDK_INT > 10) {
-            mFragmentTabHost.getTabWidget().setShowDividers(0);
+    //初始化底部菜单导航条
+    private void initBottomMenu(Bundle savedInstanceState) {
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.setItems(R.menu.bottom_menu);
 
-            mFragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-                @Override
-                public void onTabChanged(String tabId) {
-                    if(tabId.equals(getString(Indicator.TEST.getResName()))){
-                        mCount.setVisibility(View.VISIBLE);
-                    }else{
-                        mCount.setVisibility(View.GONE);
-                    }
+        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                //处理导航触发事件 复习、测试、其他
+                switch (menuItemId) {
+                    case R.id.bb_menu_review:
+//                        ReviewFragment reviewFragment = (ReviewFragment) getSupportFragmentManager().findFragmentByTag(TAG_REVIEW);
+//                        if(reviewFragment == null){
+//                            reviewFragment = ReviewFragment.newInstance();
+//                            addFragmentToActivity(reviewFragment,R.id.frame_content,TAG_REVIEW);
+//                        }
+//                        if(mReviewPresenter == null){
+//                            Context context = MainActivity.this;
+//                            mReviewPresenter = new ReviewPresenter(reviewFragment,context,
+//                                    PointRepository.newInstance(context, PointRemoteDataSource.newInstance(context),
+//                                            PointLocalDataSource.newInstance(context)));
+//                        }
+//                        doTabChanged(TAG_REVIEW);
+                        ReviewFragmentEx reviewFragmentEx = (ReviewFragmentEx) getSupportFragmentManager().findFragmentByTag(TAG_REVIEW);
+                        if (reviewFragmentEx == null) {
+                            reviewFragmentEx = ReviewFragmentEx.newInstance();
+                            addFragmentToActivity(reviewFragmentEx, R.id.frame_content, TAG_REVIEW);
+                        }
+                        ReviewPresenter reviewPresenter = new ReviewPresenter(MainActivity.this, reviewFragmentEx, reviewFragmentEx, reviewFragmentEx);
+                        reviewFragmentEx.setPresenter(reviewPresenter);
+//                        PullToRefreshPresenter pullToRefreshPresenter = new PullToRefreshPresenter(reviewFragmentEx);
+//                        reviewFragmentEx.setRefreshPresenter(pullToRefreshPresenter);
+                        break;
+                    case R.id.bb_menu_exam:
+//                        ExamFragment examFragment = (ExamFragment) mFragmentManager.findFragmentByTag(TAG_EXAM);
+//                        if(examFragment == null){
+//                            examFragment = ExamFragment.newInstance();
+//                            addFragmentToActivity(examFragment,R.id.frame_content,TAG_EXAM);
+//                        }
+//                        doTabChanged(TAG_EXAM);
+                        break;
+                    case R.id.bb_menu_setting:
+//                        SettingFragment settingFragment = (SettingFragment) mFragmentManager.findFragmentByTag(TAG_SETTING);
+//                        if(settingFragment == null){
+//                            settingFragment = SettingFragment.newInstance();
+//                            addFragmentToActivity(settingFragment, R.id.frame_content, TAG_SETTING);
+//                        }
+//                        doTabChanged(TAG_SETTING);
+                        break;
                 }
-            });
-    }}
+            }
 
-    public View getRootView() {
-        return mRootView;
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+                //再次点击该菜单时触发此方法
+            }
+        });
+
     }
 
-
-    public void setTextCount(int count){
-        mCount.setText("已做"+count+"题");
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        mBottomBar.onSaveInstanceState(outState);
     }
 
-    /** 返回设置好的底部按钮
-     * @param indicator1
-     * @return
-     */
-    private View getIndicatorView(Indicator indicator1) {
-        View view = LayoutInflater.from(this).inflate(R.layout.tab_indicator, null);
-        TextView indicator = (TextView) view.findViewById(R.id.tab_title);
-
-        indicator.setText(getString(indicator1.getResName()));
-
-        indicator.setTextSize(TypedValue.COMPLEX_UNIT_SP,10);
-        Drawable icon = this.getResources().getDrawable(indicator1.getResIcon());
-//        自定义ICON大小
-//        icon.setBounds(0, 0, 75, 75);
-//        indicator.setCompoundDrawables(null,icon,null,null);
-        indicator.setCompoundDrawablePadding(3);
-        indicator.setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
-        indicator.setPadding(0,8,0,5);
-
-
-        return view;
-    }
-
-
-    /**
-     * 监听返回--是否退出程序
-     */
+    //监听返回--是否退出程序
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
             return mDoubleClickExit.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

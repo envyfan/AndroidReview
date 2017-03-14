@@ -29,8 +29,8 @@ import com.vv.androidreview.R;
  */
 public enum Indicator {
 
-    REVIEW(0, R.string.main_tab_name_review, R.drawable.tab_icon_review,
-            ReviewFragment.class),
+//    REVIEW(0, R.string.main_tab_name_review, R.drawable.tab_icon_review,
+//            ReviewFragment.class),
 
     TEST(1, R.string.main_tab_name_test, R.drawable.tab_icon_test,
             TestFragment.class),

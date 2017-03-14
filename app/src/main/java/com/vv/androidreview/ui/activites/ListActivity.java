@@ -28,7 +28,6 @@ import com.vv.androidreview.entity.Point;
 import com.vv.androidreview.mvp.base.BaseToolbarActivity;
 import com.vv.androidreview.ui.fragment.FavListFragment;
 import com.vv.androidreview.ui.fragment.ReviewContentListFragment;
-import com.vv.androidreview.ui.fragment.ReviewFragment;
 
 public class ListActivity extends BaseToolbarActivity {
     public static final String CONTENT_TYPE_KEY = "content_type_key";
@@ -60,7 +59,7 @@ public class ListActivity extends BaseToolbarActivity {
 
             switch (mType) {
                 case LIST_TYPE_REVIEW_CONTENT:
-                    mPoint = (Point) intent.getSerializableExtra(ReviewFragment.ARGUMENT_POINT_KEY);
+//                    mPoint = (Point) intent.getSerializableExtra(ReviewFragment.ARGUMENT_POINT_KEY);
                     break;
                 case LIST_TYPE_FAV_TEST:
                     break;
@@ -92,7 +91,7 @@ public class ListActivity extends BaseToolbarActivity {
     private void showReviewContentListFragment() {
         mReviewContentListFragment = new ReviewContentListFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ReviewFragment.ARGUMENT_POINT_KEY, mPoint);
+//        bundle.putSerializable(ReviewFragment.ARGUMENT_POINT_KEY, mPoint);
         mReviewContentListFragment.setArguments(bundle);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.id_content_fragment, mReviewContentListFragment);

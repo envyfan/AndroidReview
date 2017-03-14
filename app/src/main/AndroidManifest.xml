@@ -43,7 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.main.MainActivity" />
         <activity android:name=".ui.activites.ListActivity" />
         <activity android:name=".ui.activites.DetailActivity" />
         <activity android:name=".ui.activites.FavActivity" />
@@ -54,7 +53,7 @@
         <activity android:name=".ui.activites.SettingCacheActivity" />
         <activity android:name=".ui.activites.CreateTableActivity" />
         <activity android:name=".ui.activites.VersionNoteActivity" />
-        <activity android:name=".mvp.main.Main2Activity" />
+        <activity android:name=".mvp.main.MainActivity" />
     </application>
 
 </manifest>
