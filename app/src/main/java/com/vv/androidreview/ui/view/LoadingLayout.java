@@ -20,7 +20,6 @@
 package com.vv.androidreview.ui.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.mvp.system.CodeConfig;
+import com.vv.androidreview.mvp.config.CodeConfig;
 
 /**
  * Author：Vv on .

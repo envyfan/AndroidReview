@@ -17,7 +17,7 @@
  * along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vv.androidreview.mvp.main;
+package com.vv.androidreview.mvp.review;
 
 import android.content.Context;
 import android.content.Intent;

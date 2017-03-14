@@ -11,7 +11,7 @@ import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.BaseFragment;
 import com.vv.androidreview.mvp.base.RefreshableView;
-import com.vv.androidreview.mvp.system.CodeConfig;
+import com.vv.androidreview.mvp.config.CodeConfig;
 import com.vv.androidreview.mvp.system.StaticValues;
 import com.vv.androidreview.ui.view.LoadingLayout;
 

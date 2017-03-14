@@ -1,15 +1,8 @@
 package com.vv.androidreview.mvp.review;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.vv.androidreview.R;
-import com.vv.androidreview.mvp.base.RecycleRefreshableView;
-import com.vv.androidreview.mvp.base.RefreshableView;
 import com.vv.androidreview.mvp.component.pulltorefresh.RecyclePullToRefreshFragment;
-import com.vv.androidreview.mvp.main.ReviewListAdapterGV;
 
 /**
  * Author：Vv on .
