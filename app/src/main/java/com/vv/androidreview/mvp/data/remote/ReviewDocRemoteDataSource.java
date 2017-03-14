@@ -56,8 +56,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
         BmobQuery<Unit> query = new BmobQuery<>();
         //执行查询，查询单元表 取出所有单元
         query.order("score,sort");
-//        query.setLimit(ReviewFragment.LIMIT);
-        query.setLimit(2);
+        query.setLimit(StaticValues.HOME_SCREEN_LIST_LIMIT);
         query.findObjects(mContext, new FindListener<Unit>() {
             @Override
             public void onSuccess(final List<Unit> unitList) {
@@ -72,7 +71,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
                             try {
                                 CacheHelper.saveObject(mContext, (Serializable) unitList, CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
                             } catch (Exception e) {
-                                Logger.e("保存单元缓存失败");
+                                Logger.e("save unit cache failed");
                             }
                         }
                     });
@@ -112,7 +111,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
                             try {
                                 CacheHelper.saveObject(mContext, (Serializable) pointList, CacheHelper.GROUP_POINT_LIST_CACHE_KEY);
                             } catch (Exception e) {
-                                Logger.e("保存知识点缓存失败");
+                                Logger.e("save points cache failed");
                             }
                         }
                     });

@@ -27,7 +27,7 @@ public class Main2Activity extends BaseToolbarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        initToolBar(false,getString(R.string.app_name));
+        initToolBar(false, getString(R.string.app_name));
 
         //初始化底部菜单导航条
         initBottomMenu(savedInstanceState);
@@ -62,9 +62,9 @@ public class Main2Activity extends BaseToolbarActivity {
                         ReviewFragmentEx reviewFragmentEx = (ReviewFragmentEx) getSupportFragmentManager().findFragmentByTag(TAG_REVIEW);
                         if (reviewFragmentEx == null) {
                             reviewFragmentEx = ReviewFragmentEx.newInstance();
-                            addFragmentToActivity(reviewFragmentEx,R.id.frame_content,TAG_REVIEW);
+                            addFragmentToActivity(reviewFragmentEx, R.id.frame_content, TAG_REVIEW);
                         }
-                        ReviewPresenter reviewPresenter = new ReviewPresenter(Main2Activity.this,reviewFragmentEx);
+                        ReviewPresenter reviewPresenter = new ReviewPresenter(Main2Activity.this, reviewFragmentEx, reviewFragmentEx, reviewFragmentEx);
                         reviewFragmentEx.setPresenter(reviewPresenter);
 //                        PullToRefreshPresenter pullToRefreshPresenter = new PullToRefreshPresenter(reviewFragmentEx);
 //                        reviewFragmentEx.setRefreshPresenter(pullToRefreshPresenter);

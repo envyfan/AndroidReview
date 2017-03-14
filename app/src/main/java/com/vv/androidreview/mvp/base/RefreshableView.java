@@ -6,7 +6,7 @@ package com.vv.androidreview.mvp.base;
  * Description：
  */
 
-public interface BaseRefreshableView<T> extends BaseView<T>{
+public interface RefreshableView {
 
     /**
      * 完成数据加载（可能从本地加载也可能从网络加载 ）
@@ -19,4 +19,9 @@ public interface BaseRefreshableView<T> extends BaseView<T>{
      * @param msg complete message
      */
     void completePullToRefresh(String msg);
+
+    /**
+     * 完成下拉刷新 默认提示: {@link com.vv.androidreview.mvp.system.StaticValues.REQUEST_SUCCESS}
+     */
+    void completePullToRefresh();
 }

@@ -5,11 +5,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.BaseFragment;
+import com.vv.androidreview.mvp.base.RefreshableView;
 import com.vv.androidreview.mvp.system.CodeConfig;
+import com.vv.androidreview.mvp.system.StaticValues;
 import com.vv.androidreview.ui.view.LoadingLayout;
 
 /**
@@ -18,7 +21,7 @@ import com.vv.androidreview.ui.view.LoadingLayout;
  * Description：
  */
 
-public abstract class PullToRefreshFragment extends BaseFragment {
+public abstract class PullToRefreshFragment extends BaseFragment implements RefreshableView {
 
     private SwipeRefreshLayout mRefreshLayout;
     private LoadingLayout mLoadingLayout;
@@ -38,7 +41,7 @@ public abstract class PullToRefreshFragment extends BaseFragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Logger.e("onclick");
+                    Logger.d("loadingView onclick");
                     mLoadingLayout.setLoadingLayout(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_LOADING);
                     onLoadData();
                 }
@@ -66,12 +69,21 @@ public abstract class PullToRefreshFragment extends BaseFragment {
         }
     }
 
-    public LoadingLayout getLoadingLayout() {
-        return mLoadingLayout;
+    @Override
+    public void completeDataLoading(int loadingLayoutStatusType) {
+        mLoadingLayout.setLoadingLayout(loadingLayoutStatusType);
     }
 
-    public SwipeRefreshLayout getRefreshLayout() {
-        return mRefreshLayout;
+    @Override
+    public void completePullToRefresh(String msg) {
+        mRefreshLayout.setRefreshing(false);
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void completePullToRefresh() {
+        mRefreshLayout.setRefreshing(false);
+        Toast.makeText(getActivity(), StaticValues.REQUEST_SUCCESS, Toast.LENGTH_SHORT).show();
     }
 
     public abstract int getRefreshLayoutId();

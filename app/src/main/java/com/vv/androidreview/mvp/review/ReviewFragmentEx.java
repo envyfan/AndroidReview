@@ -6,7 +6,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.vv.androidreview.R;
-import com.vv.androidreview.mvp.component.pulltorefresh.PullToRefreshFragment;
+import com.vv.androidreview.mvp.base.RecycleRefreshableView;
+import com.vv.androidreview.mvp.base.RefreshableView;
+import com.vv.androidreview.mvp.component.pulltorefresh.RecyclePullToRefreshFragment;
+import com.vv.androidreview.mvp.main.ReviewListAdapterGV;
 
 /**
  * Author：Vv on .
@@ -14,65 +17,41 @@ import com.vv.androidreview.mvp.component.pulltorefresh.PullToRefreshFragment;
  * Description：
  */
 
-public class ReviewFragmentEx extends PullToRefreshFragment implements ReviewContract.ReviewView {
+public class ReviewFragmentEx extends RecyclePullToRefreshFragment<ReviewListAdapterGV> implements ReviewContract.ReviewView {
 
     private ReviewContract.ReviewPresenter mReviewPresenter;
 
+    private ReviewListAdapterGV mAdapter;
+
     public static ReviewFragmentEx newInstance() {
-
         Bundle args = new Bundle();
-
         ReviewFragmentEx fragment = new ReviewFragmentEx();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreateRootView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateRootView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.test_layout;
-    }
-
-    @Override
-    public int getRefreshLayoutId() {
-        return R.id.test_refresh;
-    }
-
-    @Override
-    public int getLoadingLayoutId() {
-        return R.id.ly_loading;
+    public ReviewListAdapterGV getAdapter() {
+        if (mAdapter == null) {
+            mAdapter = new ReviewListAdapterGV(getActivity());
+        }
+        return mAdapter;
     }
 
     @Override
     public void onPullToRefresh() {
-        mReviewPresenter.requestPoint(false, false);
+        mReviewPresenter.requestData(false, false);
     }
 
     @Override
     public void onLoadData() {
-        mReviewPresenter.requestPoint(true, true);
+        mReviewPresenter.requestData(true, true);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         onLoadData();
-    }
-
-    @Override
-    public void completeDataLoading(int loadingLayoutStatusType) {
-        getLoadingLayout().setLoadingLayout(loadingLayoutStatusType);
-    }
-
-
-    @Override
-    public void completePullToRefresh(String msg) {
-        getRefreshLayout().setRefreshing(false);
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

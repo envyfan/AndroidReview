@@ -1,7 +1,7 @@
 package com.vv.androidreview.mvp.review;
 
 import com.vv.androidreview.mvp.base.BasePresenter;
-import com.vv.androidreview.mvp.base.BaseRefreshableView;
+import com.vv.androidreview.mvp.base.BaseView;
 
 /**
  * Created by zhiwei.a.fan on 3/3/2017.
@@ -9,11 +9,10 @@ import com.vv.androidreview.mvp.base.BaseRefreshableView;
 
 public interface ReviewContract {
 
-    interface ReviewView extends BaseRefreshableView<ReviewPresenter> {
-
+    interface ReviewView extends BaseView<ReviewPresenter> {
     }
 
     interface ReviewPresenter extends BasePresenter {
-        void requestPoint(boolean isReadCache, boolean isAutoRequest);
+        void requestData(boolean isReadCache, boolean isAutoRequest);
     }
 }
