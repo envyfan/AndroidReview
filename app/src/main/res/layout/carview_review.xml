@@ -25,10 +25,9 @@
     android:layout_width="@dimen/list_review_carview_width"
     android:layout_height="@dimen/list_review_carview_height"
     android:layout_margin="10dp"
-    app:cardBackgroundColor="@color/theme_color_level2"
-    app:cardCornerRadius="10dp"
     android:foreground="?android:attr/selectableItemBackground"
-    >
+    app:cardBackgroundColor="@color/theme_color_level2"
+    app:cardCornerRadius="10dp">
 
 
     <TextView

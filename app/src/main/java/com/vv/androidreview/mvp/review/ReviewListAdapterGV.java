@@ -21,8 +21,12 @@ package com.vv.androidreview.mvp.review;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +99,7 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter{
         List<Point> points = gruop.get(unitName);
         viewHolder.gv_carview.setAdapter(new GvAdapter(points));
         //取消gridview默认的点击效果 只留下carview的点击效果
-//        viewHolder.gv_carview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        viewHolder.gv_carview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         viewHolder.gv_carview.setOnItemClickListener(new GridView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
