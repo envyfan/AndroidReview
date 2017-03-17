@@ -63,9 +63,11 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter{
 
     protected Context mContext;
     private List<Map<String, List<Point>>> mDatas = new ArrayList<>();
+    private GvAdapter gvAdapter;
 
     public ReviewListAdapterGV(Context context) {
         this.mContext = context;
+        gvAdapter = new GvAdapter();
     }
 
     public void setDatas(List<Map<String, List<Point>>> datas){
@@ -97,7 +99,8 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter{
         }
         viewHolder.tv_unit.setText(unitName);
         List<Point> points = gruop.get(unitName);
-        viewHolder.gv_carview.setAdapter(new GvAdapter(points));
+        gvAdapter.setData(points);
+        viewHolder.gv_carview.setAdapter(gvAdapter);
         //取消gridview默认的点击效果 只留下carview的点击效果
         viewHolder.gv_carview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         viewHolder.gv_carview.setOnItemClickListener(new GridView.OnItemClickListener() {
@@ -137,10 +140,6 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter{
 
         private List<Point> points = new ArrayList<>();
 
-        public GvAdapter(List<Point> points) {
-            this.points = points;
-        }
-
         @Override
         public int getCount() {
             return points.size();
@@ -172,6 +171,10 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter{
             cardViewSetBackgroundColor(point, viewHolder_gv.cv_carview);
 
             return convertView;
+        }
+
+        public void setData(List<Point> pooints){
+            this.points = pooints;
         }
     }
 
