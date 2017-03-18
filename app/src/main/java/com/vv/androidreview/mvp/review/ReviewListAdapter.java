@@ -44,6 +44,7 @@ import java.util.Map;
  * Description：
  */
 public class ReviewListAdapter extends RecyclerView.Adapter {
+
     public static final int DEFAULT = -1;
     public static final int NO_CONTENT = 0;
     public static final int BROWN = 1;

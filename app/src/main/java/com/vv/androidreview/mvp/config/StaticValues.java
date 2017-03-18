@@ -1,4 +1,4 @@
-package com.vv.androidreview.mvp.system;
+package com.vv.androidreview.mvp.config;
 
 /**
  * Created by zhiwei.a.fan on 3/3/2017.

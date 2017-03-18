@@ -10,15 +10,15 @@ import com.vv.androidreview.mvp.component.pulltorefresh.RecyclePullToRefreshFrag
  * Description：
  */
 
-public class ReviewFragmentEx extends RecyclePullToRefreshFragment<ReviewListAdapter> implements ReviewContract.ReviewView {
+public class ReviewFragment extends RecyclePullToRefreshFragment<ReviewListAdapter> implements ReviewContract.ReviewView {
 
     private ReviewContract.ReviewPresenter mReviewPresenter;
 
     private ReviewListAdapter mAdapter;
 
-    public static ReviewFragmentEx newInstance() {
+    public static ReviewFragment newInstance() {
         Bundle args = new Bundle();
-        ReviewFragmentEx fragment = new ReviewFragmentEx();
+        ReviewFragment fragment = new ReviewFragment();
         fragment.setArguments(args);
         return fragment;
     }

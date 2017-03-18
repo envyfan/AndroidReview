@@ -9,7 +9,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.BaseToolbarActivity;
-import com.vv.androidreview.mvp.review.ReviewFragmentEx;
+import com.vv.androidreview.mvp.review.ReviewFragment;
 import com.vv.androidreview.mvp.review.ReviewPresenter;
 import com.vv.androidreview.utils.DoubleClickExitHelper;
 
@@ -59,15 +59,13 @@ public class MainActivity extends BaseToolbarActivity {
 //                                            PointLocalDataSource.newInstance(context)));
 //                        }
 //                        doTabChanged(TAG_REVIEW);
-                        ReviewFragmentEx reviewFragmentEx = (ReviewFragmentEx) getSupportFragmentManager().findFragmentByTag(TAG_REVIEW);
-                        if (reviewFragmentEx == null) {
-                            reviewFragmentEx = ReviewFragmentEx.newInstance();
-                            addFragmentToActivity(reviewFragmentEx, R.id.frame_content, TAG_REVIEW);
+                        ReviewFragment reviewFragment = (ReviewFragment) getSupportFragmentManager().findFragmentByTag(TAG_REVIEW);
+                        if (reviewFragment == null) {
+                            reviewFragment = ReviewFragment.newInstance();
+                            addFragmentToActivity(reviewFragment, R.id.frame_content, TAG_REVIEW);
                         }
-                        ReviewPresenter reviewPresenter = new ReviewPresenter(MainActivity.this, reviewFragmentEx, reviewFragmentEx, reviewFragmentEx);
-                        reviewFragmentEx.setPresenter(reviewPresenter);
-//                        PullToRefreshPresenter pullToRefreshPresenter = new PullToRefreshPresenter(reviewFragmentEx);
-//                        reviewFragmentEx.setRefreshPresenter(pullToRefreshPresenter);
+                        ReviewPresenter reviewPresenter = new ReviewPresenter(MainActivity.this, reviewFragment, reviewFragment, reviewFragment);
+                        reviewFragment.setPresenter(reviewPresenter);
                         break;
                     case R.id.bb_menu_exam:
 //                        ExamFragment examFragment = (ExamFragment) mFragmentManager.findFragmentByTag(TAG_EXAM);

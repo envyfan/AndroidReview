@@ -11,7 +11,7 @@ import com.vv.androidreview.mvp.data.entity.Unit;
 import com.vv.androidreview.mvp.data.repository.interfaces.OnLoadDataCallBack;
 import com.vv.androidreview.mvp.data.repository.interfaces.ReviewDocDataSource;
 import com.vv.androidreview.mvp.config.CodeConfig;
-import com.vv.androidreview.mvp.system.StaticValues;
+import com.vv.androidreview.mvp.config.StaticValues;
 
 import java.util.List;
 

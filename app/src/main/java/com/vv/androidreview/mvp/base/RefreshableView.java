@@ -1,5 +1,7 @@
 package com.vv.androidreview.mvp.base;
 
+import com.vv.androidreview.mvp.config.StaticValues;
+
 /**
  * Author：Vv on .
  * Mail：envyfan@qq.com
@@ -21,7 +23,7 @@ public interface RefreshableView {
     void completePullToRefresh(String msg);
 
     /**
-     * 完成下拉刷新 默认提示: {@link com.vv.androidreview.mvp.system.StaticValues.REQUEST_SUCCESS}
+     * 完成下拉刷新 默认提示: {@link StaticValues.REQUEST_SUCCESS}
      */
     void completePullToRefresh();
 }
