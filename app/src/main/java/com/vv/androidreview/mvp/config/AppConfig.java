@@ -20,14 +20,12 @@ public class AppConfig {
          */
         public static final int APP_START_DELAY_TIME = 2000;
 
-        /**
-         * 首页列表长度
-         **/
-        public static final int HOME_SCREEN_LIST_LIMIT = 10;
+
         /**
          * 公共默认列表长度
          **/
         public static final int COMMON_LIST_LIMIT = 15;
+
 
         /**
          * 应用所需的全部敏感权限
@@ -36,5 +34,23 @@ public class AppConfig {
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
+    }
+
+
+    /**
+     * 复习界面配置
+     */
+    public static final class ReviewPageConfig {
+
+        /**
+         * 列表长度
+         **/
+        public static final int PAGE_REVIEW_LIST_LIMIT = 10;
+
+        /**
+         * 列表列数
+         **/
+        public static final int PAGE_REVIEW_LIST_COLUMN = 3;
+
     }
 }

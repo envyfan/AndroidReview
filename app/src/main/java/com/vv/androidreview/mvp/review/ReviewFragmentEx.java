@@ -10,11 +10,11 @@ import com.vv.androidreview.mvp.component.pulltorefresh.RecyclePullToRefreshFrag
  * Description：
  */
 
-public class ReviewFragmentEx extends RecyclePullToRefreshFragment<ReviewListAdapterGV> implements ReviewContract.ReviewView {
+public class ReviewFragmentEx extends RecyclePullToRefreshFragment<ReviewListAdapter> implements ReviewContract.ReviewView {
 
     private ReviewContract.ReviewPresenter mReviewPresenter;
 
-    private ReviewListAdapterGV mAdapter;
+    private ReviewListAdapter mAdapter;
 
     public static ReviewFragmentEx newInstance() {
         Bundle args = new Bundle();
@@ -24,9 +24,9 @@ public class ReviewFragmentEx extends RecyclePullToRefreshFragment<ReviewListAda
     }
 
     @Override
-    public ReviewListAdapterGV getAdapter() {
+    public ReviewListAdapter getAdapter() {
         if (mAdapter == null) {
-            mAdapter = new ReviewListAdapterGV(getActivity());
+            mAdapter = new ReviewListAdapter(getActivity());
         }
         return mAdapter;
     }

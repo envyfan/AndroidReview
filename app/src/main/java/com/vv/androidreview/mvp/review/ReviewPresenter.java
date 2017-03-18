@@ -11,6 +11,7 @@ import com.vv.androidreview.mvp.data.repository.ContentRepository;
 import com.vv.androidreview.mvp.data.repository.interfaces.OnLoadDataCallBack;
 import com.vv.androidreview.mvp.data.repository.interfaces.ReviewDocDataSource;
 import com.vv.androidreview.mvp.config.CodeConfig;
+import com.vv.androidreview.mvp.system.StaticValues;
 import com.vv.androidreview.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -27,13 +28,13 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
     private ReviewDocDataSource mReviewDocDataSource;
     private ReviewContract.ReviewView mReviewView;
     private RefreshableView mRefreshableView;
-    private RecycleRefreshableView<ReviewListAdapterGV> mRecycleRefreshableView;
+    private RecycleRefreshableView<ReviewListAdapter> mRecycleRefreshableView;
 
     private List<Map<String, List<Point>>> mData = new ArrayList<>();
 
     public ReviewPresenter(Context context, ReviewContract.ReviewView reviewView,
                            RefreshableView refreshableView,
-                           RecycleRefreshableView<ReviewListAdapterGV> recycleRefreshableView) {
+                           RecycleRefreshableView<ReviewListAdapter> recycleRefreshableView) {
         mReviewDocDataSource = new ContentRepository(context);
         mReviewView = reviewView;
         this.mRefreshableView = refreshableView;
@@ -116,8 +117,8 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
             //如果无数据，则插入一个空数据用于 友好提示
             if (pointsForUnit.size() == 0) {
                 Point point = new Point();
-                point.setName("暂无内容\n敬请期待");
-                point.setColor(ReviewListAdapterGV.NO_CONTENT);
+                point.setName(StaticValues.DEFAULT_POINT_NAME);
+                point.setColor(ReviewListAdapter.NO_CONTENT);
                 pointsForUnit.add(point);
             }
             map.put(unit.getName(), pointsForUnit);
@@ -134,8 +135,8 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
     }
 
     private void updateDataForAdapter() {
-        ReviewListAdapterGV adapter = mRecycleRefreshableView.getAdapter();
-        adapter.setDatas(mData);
+        ReviewListAdapter adapter = mRecycleRefreshableView.getAdapter();
+        adapter.setData(mData);
         adapter.notifyDataSetChanged();
     }
 }

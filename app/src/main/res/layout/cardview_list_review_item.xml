@@ -19,22 +19,22 @@
   ~ along with AndroidReview.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<com.vv.androidreview.ui.view.SquareCarView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.vv.androidreview.ui.view.SquareCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_carview"
-    android:layout_width="@dimen/list_review_carview_width"
-    android:layout_height="@dimen/list_review_carview_height"
-    android:layout_margin="10dp"
+    android:id="@+id/cv_cardview"
+    android:layout_width="@dimen/review_page_list_item_cardview_width"
+    android:layout_height="@dimen/review_page_list_item_cardview_height"
+    android:layout_margin="@dimen/review_page_list_item_cardview_margin"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/theme_color_level2"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="@dimen/review_page_list_item_cardview_radius">
 
 
     <TextView
-        android:id="@+id/tv_carview"
+        android:id="@+id/tv_cardview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:textSize="12sp" />
-</com.vv.androidreview.ui.view.SquareCarView>
+        android:textSize="@dimen/review_page_list_item_cardview_text_size" />
+</com.vv.androidreview.ui.view.SquareCardView>

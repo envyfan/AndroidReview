@@ -57,7 +57,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
         BmobQuery<Unit> query = new BmobQuery<>();
         //执行查询，查询单元表 取出所有单元
         query.order("score,sort");
-        query.setLimit(AppConfig.BaseConfig.HOME_SCREEN_LIST_LIMIT);
+        query.setLimit(AppConfig.ReviewPageConfig.PAGE_REVIEW_LIST_LIMIT);
         query.findObjects(mContext, new FindListener<Unit>() {
             @Override
             public void onSuccess(final List<Unit> unitList) {

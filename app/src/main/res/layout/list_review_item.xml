@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016. Vv <envyfan@qq.com><http://www.v-sounds.com/>
   ~
   ~ This file is part of AndroidReview (Android面试复习)
@@ -28,22 +27,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/theme_color_level2"
-        android:padding="5dp"
+        android:padding="@dimen/review_page_list_item_title_padding"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="@dimen/review_page_list_item_title_size" />
 
-    <HorizontalScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:id="@+id/ly_carview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_buttom_to_horizontalscrollview_and_carview"
-            android:paddingTop="@dimen/padding_top_to_horizontalscrollview_and_carview"/>
-    </HorizontalScrollView>
+        android:layout_marginBottom="@dimen/review_page_list_item_vertical_margin"
+        android:layout_marginLeft="@dimen/review_page_list_item_horizontal_margin"
+        android:layout_marginRight="@dimen/review_page_list_item_horizontal_margin"
+        android:layout_marginTop="@dimen/review_page_list_item_vertical_margin" />
 
 </LinearLayout>

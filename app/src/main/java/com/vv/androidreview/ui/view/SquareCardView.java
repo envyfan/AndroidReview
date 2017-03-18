@@ -28,16 +28,16 @@ import android.util.AttributeSet;
  * Mail：envyfan@qq.com
  * Description：
  */
-public class SquareCarView extends CardView {
-    public SquareCarView(Context context) {
+public class SquareCardView extends CardView {
+    public SquareCardView(Context context) {
         this(context, null);
     }
 
-    public SquareCarView(Context context, AttributeSet attrs) {
+    public SquareCardView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SquareCarView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SquareCardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
