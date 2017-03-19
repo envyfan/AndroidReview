@@ -12,7 +12,7 @@ import com.vv.androidreview.R;
 
 public abstract class BaseToolbarActivity extends BaseActivity {
 
-    protected Toolbar toolbar;
+    protected Toolbar mToolbar;
 
     /**
      * 隐藏ToolBar
@@ -36,14 +36,14 @@ public abstract class BaseToolbarActivity extends BaseActivity {
      * 初始化ToolBar
      */
     public void initToolBar(boolean isShowCancel) {
-        initToolBar(-1, isShowCancel,"");
+        initToolBar(-1, isShowCancel, "");
     }
 
     /**
      * 初始化ToolBar
      */
-    public void initToolBar(boolean isShowCancel,String title) {
-        initToolBar(-1, isShowCancel,title);
+    public void initToolBar(boolean isShowCancel, String title) {
+        initToolBar(-1, isShowCancel, title);
     }
 
     /**
@@ -51,37 +51,40 @@ public abstract class BaseToolbarActivity extends BaseActivity {
      *
      * @param logoRes logo 资源id
      */
-    public void initToolBar(int logoRes, boolean isShowCancel,String title) {
-        toolbar = (Toolbar) findViewById(R.id.tb_toolbar);
-        if (toolbar != null) {
-            if (logoRes > 0) {
-                toolbar.setLogo(logoRes);
-            }
-            toolbar.setBackgroundColor(getResources().getColor(R.color.theme_color));
-            toolbar.setTitleTextAppearance(this, R.style.ToolBarTitleTextApperance);
-            setSupportActionBar(toolbar);
+    public void initToolBar(int logoRes, boolean isShowCancel, String title) {
+        mToolbar = (Toolbar) findViewById(R.id.tb_toolbar);
+
+        if (logoRes > 0) {
+            mToolbar.setLogo(logoRes);
+        }
+        mToolbar.setBackgroundColor(getResources().getColor(R.color.theme_color));
+        mToolbar.setTitleTextAppearance(this, R.style.ToolBarTitleTextApperance);
+
+
+        if (!TextUtils.isEmpty(title)) {
+            mToolbar.setTitle(title);
         }
 
+        setSupportActionBar(mToolbar);
+
         if (isShowCancel) {
-            toolbar.setNavigationIcon(R.mipmap.ic_top_back);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            mToolbar.setNavigationIcon(R.mipmap.ic_top_back);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();
                 }
             });
         } else {
-            toolbar.setNavigationIcon(null);
-            toolbar.setNavigationOnClickListener(null);
+            mToolbar.setNavigationIcon(null);
+            mToolbar.setNavigationOnClickListener(null);
         }
 
-        if (!TextUtils.isEmpty(title)) {
-            toolbar.setTitle(title);
-        }
+
     }
 
     public Toolbar getToolbar() {
-        return toolbar;
+        return mToolbar;
     }
 
 

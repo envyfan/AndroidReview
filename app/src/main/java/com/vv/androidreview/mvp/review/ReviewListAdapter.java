@@ -20,6 +20,7 @@
 package com.vv.androidreview.mvp.review;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,15 +28,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.config.AppConfig;
 import com.vv.androidreview.mvp.data.entity.Point;
+import com.vv.androidreview.mvp.review.list.ReviewContentListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 
 /**
@@ -58,15 +61,14 @@ public class ReviewListAdapter extends RecyclerView.Adapter {
 
     protected Context mContext;
     private List<Map<String, List<Point>>> mData = new ArrayList<>();
-    private ItemAdapter mItemAdapter;
 
     public ReviewListAdapter(Context context) {
         this.mContext = context;
-        mItemAdapter = new ItemAdapter();
     }
 
     public void setData(List<Map<String, List<Point>>> data) {
         this.mData = data;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -95,9 +97,10 @@ public class ReviewListAdapter extends RecyclerView.Adapter {
         itemRecycleHolder.tv_unit.setText(unitName);
 
         List<Point> points = group.get(unitName);
-        mItemAdapter.setData(points);
+        ItemAdapter adapter = new ItemAdapter();
         itemRecycleHolder.rv_carview.setLayoutManager(new GridLayoutManager(mContext, AppConfig.ReviewPageConfig.PAGE_REVIEW_LIST_COLUMN));
-        itemRecycleHolder.rv_carview.setAdapter(mItemAdapter);
+        itemRecycleHolder.rv_carview.setAdapter(adapter);
+        adapter.setData(points);
     }
 
     @Override
@@ -106,9 +109,9 @@ public class ReviewListAdapter extends RecyclerView.Adapter {
     }
 
     private void startContentList(Point point) {
-//        Intent intent = new Intent(mContext, ContentListActivity.class);
-//        intent.putExtra(ContentListActivity.ARGUMENT_POINT_KEY, point);
-//        mContext.startActivity(intent);
+        Intent intent = new Intent(mContext, ReviewContentListActivity.class);
+        intent.putExtra(ReviewContentListActivity.ARGUMENT_POINT_KEY, point);
+        mContext.startActivity(intent);
     }
 
     private class ItemAdapter extends RecyclerView.Adapter {
@@ -131,7 +134,6 @@ public class ReviewListAdapter extends RecyclerView.Adapter {
                 public void onClick(View view) {
                     if (point.getObjectId() != null) {
                         startContentList(point);
-                        Toast.makeText(mContext, "on click ", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

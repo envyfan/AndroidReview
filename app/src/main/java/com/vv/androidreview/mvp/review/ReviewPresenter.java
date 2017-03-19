@@ -12,6 +12,7 @@ import com.vv.androidreview.mvp.data.repository.interfaces.OnLoadDataCallBack;
 import com.vv.androidreview.mvp.data.repository.interfaces.ReviewDocDataSource;
 import com.vv.androidreview.mvp.config.CodeConfig;
 import com.vv.androidreview.mvp.config.StaticValues;
+import com.vv.androidreview.mvp.tools.RequestDataUICallBackHelper;
 import com.vv.androidreview.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -59,11 +60,7 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
-                if (isAutoRequest) {
-                    mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_ERROR);
-                } else {
-                    mRefreshableView.completePullToRefresh(errorMsg);
-                }
+                RequestDataUICallBackHelper.normalRequestFail(isAutoRequest, mRefreshableView, errorMsg);
             }
         }, isReadCache);
     }
@@ -74,17 +71,12 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
             public void onSuccess(List<Point> data) {
                 if (data != null && data.size() > 0) {
                     Logger.d("point size : " + data.size());
-                    //清空数据
-                    clearData();
+
                     //根据所有单元，组合好以Map<String,List<Point>> 形式的View以便adapter好处理
                     packageAdapterData(data, units);
-                    updateDataForAdapter();
+                    mRecycleRefreshableView.getAdapter().setData(mData);
 
-                    if (isAutoRequest) {
-                        mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_HIDE);
-                    } else {
-                        mRefreshableView.completePullToRefresh();
-                    }
+                    RequestDataUICallBackHelper.normalRequestSuccess(isAutoRequest, mRefreshableView);
 
                 } else {
                     mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_REFRESH);
@@ -93,16 +85,13 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
-                if (isAutoRequest) {
-                    mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_ERROR);
-                } else {
-                    mRefreshableView.completePullToRefresh(errorMsg);
-                }
+                RequestDataUICallBackHelper.normalRequestFail(isAutoRequest, mRefreshableView, errorMsg);
             }
         }, isReadCache);
     }
 
     private void packageAdapterData(List<Point> points, List<Unit> units) {
+        clearData();
         //根据所有单元，组合好以Map<String,List<Point>> 形式的View以便adapter好处理
         for (Unit unit : units) {
             Map<String, List<Point>> map = new HashMap<>();
@@ -134,9 +123,4 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
         }
     }
 
-    private void updateDataForAdapter() {
-        ReviewListAdapter adapter = mRecycleRefreshableView.getAdapter();
-        adapter.setData(mData);
-        adapter.notifyDataSetChanged();
-    }
 }

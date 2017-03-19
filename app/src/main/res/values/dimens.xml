@@ -29,6 +29,9 @@
     <dimen name="review_page_list_item_cardview_margin">10dp</dimen>
     <dimen name="review_page_list_item_cardview_radius">10dp</dimen>
     <dimen name="review_page_list_item_cardview_text_size">12sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- review page end-->
 
 </resources>

@@ -51,4 +51,9 @@ public class ReviewFragment extends RecyclePullToRefreshFragment<ReviewListAdapt
     public void setPresenter(ReviewContract.ReviewPresenter presenter) {
         this.mReviewPresenter = presenter;
     }
+
+    @Override
+    public boolean isShowDivider() {
+        return false;
+    }
 }

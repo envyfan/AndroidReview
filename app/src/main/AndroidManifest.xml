@@ -54,6 +54,7 @@
         <activity android:name=".ui.activites.CreateTableActivity" />
         <activity android:name=".ui.activites.VersionNoteActivity" />
         <activity android:name=".mvp.main.MainActivity" />
+        <activity android:name=".mvp.review.list.ReviewContentListActivity"></activity>
     </application>
 
 </manifest>

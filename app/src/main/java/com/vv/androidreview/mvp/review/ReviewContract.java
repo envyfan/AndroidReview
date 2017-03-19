@@ -12,6 +12,9 @@ public interface ReviewContract {
     interface ReviewView extends BaseView<ReviewPresenter> {
     }
 
+    interface ReviewListView extends BaseView<ReviewPresenter> {
+    }
+
     interface ReviewPresenter extends BasePresenter {
         void requestData(boolean isReadCache, boolean isAutoRequest);
     }

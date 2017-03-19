@@ -130,7 +130,6 @@ public class MainActivity extends BaseToolbarActivity {
         }
     }
 
-    //添加Fragment到Activity
     private void addFragmentToActivity(@NonNull Fragment fragment, int frameId, @NonNull String tag){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         mFragmentMap.put(tag, fragment);

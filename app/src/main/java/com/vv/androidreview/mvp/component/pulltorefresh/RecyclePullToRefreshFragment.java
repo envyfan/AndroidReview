@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vv.androidreview.R;
 import com.vv.androidreview.mvp.base.RecycleRefreshableView;
@@ -18,6 +19,7 @@ public abstract class RecyclePullToRefreshFragment<T extends RecyclerView.Adapte
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
+    private RecycleViewLoadMoreHelper mRecycleViewLoadMoreHelper;
     private T mAdapter;
 
     @Override
@@ -46,6 +48,18 @@ public abstract class RecyclePullToRefreshFragment<T extends RecyclerView.Adapte
         mRecyclerView.setLayoutManager(getLayoutManager());
         mAdapter = getAdapter();
         mRecyclerView.setAdapter(new RecyclerViewHeaderFooterWrapper<>(mAdapter));
+
+        if (isShowDivider()) {
+            mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
+        }
+
+        mRecycleViewLoadMoreHelper = new RecycleViewLoadMoreHelper(mRecyclerView, getActivity(), new LoadMoreHelper.OnScrollBottomListener() {
+            @Override
+            public void onScrollBottom() {
+                Toast.makeText(getActivity(), "load more", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mRecycleViewLoadMoreHelper.enableLoadMore(true,false);
     }
 
     public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
@@ -58,6 +72,10 @@ public abstract class RecyclePullToRefreshFragment<T extends RecyclerView.Adapte
         } else {
             return mLayoutManager;
         }
+    }
+
+    public boolean isShowDivider(){
+        return true;
     }
 
 }
