@@ -21,36 +21,33 @@ package com.vv.androidreview.mvp.review;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.vv.androidreview.R;
+import com.vv.androidreview.mvp.config.AppConfig;
 import com.vv.androidreview.mvp.data.entity.Point;
+import com.vv.androidreview.mvp.review.list.ReviewContentListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
+
 /**
  * Author：Vv on .
  * Mail：envyfan@qq.com
  * Description：
- * item里嵌套 GridView
  */
-public class ReviewListAdapterGV extends RecyclerView.Adapter {
+public class ReviewListAdapter extends RecyclerView.Adapter {
+
     public static final int DEFAULT = -1;
     public static final int NO_CONTENT = 0;
     public static final int BROWN = 1;
@@ -63,16 +60,15 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter {
     public static final int PINK = 8;
 
     protected Context mContext;
-    private List<Map<String, List<Point>>> mDatas = new ArrayList<>();
-    private ItemAdapter mItemAdapter;
+    private List<Map<String, List<Point>>> mData = new ArrayList<>();
 
-    public ReviewListAdapterGV(Context context) {
+    public ReviewListAdapter(Context context) {
         this.mContext = context;
-        mItemAdapter = new ItemAdapter();
     }
 
-    public void setDatas(List<Map<String, List<Point>>> datas) {
-        this.mDatas = datas;
+    public void setData(List<Map<String, List<Point>>> data) {
+        this.mData = data;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -80,62 +76,42 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter {
 
         /*
             顺便复习，inflate 3个参数的含义
-            1、resouceId 布局id
+            1、resourceId 布局id
             2、root需要附加到resource资源文件的根控件，inflate()会返回一个View对象，如果第三个参数attachToRoot为true，
                就将这个root作为根对象返回，否则仅仅将这个root对象的LayoutParams属性附加到resource对象的根布局对象上，
                也就是布局文件resource的最外层的View上。如果root为null则会忽略view根对象的LayoutParams属性。
             3、attachToRoot 是否将root附加到布局文件的根视图上
          */
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_review_item_gv, null);
-        return new ViewHolder(itemView);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_review_item, null);
+        return new ItemRecycleHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Map<String, List<Point>> gruop = mDatas.get(position);
-        ViewHolder viewHolder = (ViewHolder) holder;
+        Map<String, List<Point>> group = mData.get(position);
+        ItemRecycleHolder itemRecycleHolder = (ItemRecycleHolder) holder;
         String unitName = "";
-        if (gruop.keySet().iterator().hasNext()) {
-            unitName = gruop.keySet().iterator().next();
+        if (group.keySet().iterator().hasNext()) {
+            unitName = group.keySet().iterator().next();
         }
-        viewHolder.tv_unit.setText(unitName);
-        List<Point> points = gruop.get(unitName);
-        mItemAdapter.setData(points);
-        viewHolder.rv_carview.setLayoutManager(new GridLayoutManager(mContext,3));
-        viewHolder.rv_carview.setAdapter(mItemAdapter);
-//        //取消gridview默认的点击效果 只留下carview的点击效果
-//        viewHolder.gv_carview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-//        viewHolder.gv_carview.setOnItemClickListener(new GridView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Point point = (Point) parent.getItemAtPosition(position);
-//                if (point.getObjectId() != null) {
-//                    startContentList(point);
-//                }
-//            }
-//        });
+        itemRecycleHolder.tv_unit.setText(unitName);
+
+        List<Point> points = group.get(unitName);
+        ItemAdapter adapter = new ItemAdapter();
+        itemRecycleHolder.rv_carview.setLayoutManager(new GridLayoutManager(mContext, AppConfig.ReviewPageConfig.PAGE_REVIEW_LIST_COLUMN));
+        itemRecycleHolder.rv_carview.setAdapter(adapter);
+        adapter.setData(points);
     }
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
-    }
-
-    private class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_unit;
-        private RecyclerView rv_carview;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            tv_unit = (TextView) itemView.findViewById(R.id.tv_unit);
-            rv_carview = (RecyclerView) itemView.findViewById(R.id.rv_cardview);
-        }
+        return mData.size();
     }
 
     private void startContentList(Point point) {
-//        Intent intent = new Intent(mContext, ContentListActivity.class);
-//        intent.putExtra(ContentListActivity.ARGUMENT_POINT_KEY, point);
-//        mContext.startActivity(intent);
+        Intent intent = new Intent(mContext, ReviewContentListActivity.class);
+        intent.putExtra(ReviewContentListActivity.ARGUMENT_POINT_KEY, point);
+        mContext.startActivity(intent);
     }
 
     private class ItemAdapter extends RecyclerView.Adapter {
@@ -144,13 +120,13 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder_GV(LayoutInflater.from(mContext).inflate(R.layout.carview_review, parent, false));
+            return new ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.cardview_list_review_item, parent, false));
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             final Point point = points.get(position);
-            final ViewHolder_GV itemHolder = (ViewHolder_GV) holder;
+            final ItemViewHolder itemHolder = (ItemViewHolder) holder;
             itemHolder.tv_carview.setText(point.getName());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -180,14 +156,25 @@ public class ReviewListAdapterGV extends RecyclerView.Adapter {
         }
     }
 
-    private class ViewHolder_GV extends RecyclerView.ViewHolder {
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_carview;
         private CardView cv_carview;
 
-        public ViewHolder_GV(View view) {
+        public ItemViewHolder(View view) {
             super(view);
-            tv_carview = (TextView) view.findViewById(R.id.tv_carview);
-            cv_carview = (CardView) view.findViewById(R.id.cv_carview);
+            tv_carview = (TextView) view.findViewById(R.id.tv_cardview);
+            cv_carview = (CardView) view.findViewById(R.id.cv_cardview);
+        }
+    }
+
+    private class ItemRecycleHolder extends RecyclerView.ViewHolder {
+        private TextView tv_unit;
+        private RecyclerView rv_carview;
+
+        public ItemRecycleHolder(View itemView) {
+            super(itemView);
+            tv_unit = (TextView) itemView.findViewById(R.id.tv_unit);
+            rv_carview = (RecyclerView) itemView.findViewById(R.id.rv_cardview);
         }
     }
 

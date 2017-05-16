@@ -11,9 +11,10 @@ import com.vv.androidreview.mvp.data.entity.Unit;
 import com.vv.androidreview.mvp.data.repository.interfaces.OnLoadDataCallBack;
 import com.vv.androidreview.mvp.data.repository.interfaces.ReviewDocDataSource;
 import com.vv.androidreview.mvp.config.CodeConfig;
-import com.vv.androidreview.mvp.system.StaticValues;
+import com.vv.androidreview.mvp.config.StaticValues;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Vv
@@ -31,32 +32,44 @@ public class ReviewDocLocalDataSource implements ReviewDocDataSource {
     }
 
     @Override
-    public void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isReadCache) {
+    public void getContents(@NonNull final OnLoadDataCallBack<List<Content>> loadDataCallBack, final Point point, Boolean isReadCache) {
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Content> contentList = (List<Content>) CacheHelper.readObject(mContext, CacheHelper.CONTENT_LIST_CACHE_KEY + point.getObjectId());
+                    loadDataCallBack.onSuccess(contentList);
+                } catch (Exception e) {
+                    loadDataCallBack.onFail(CodeConfig.Error.CACHE, StaticValues.REQUEST_CACHE_ERROR);
+                }
 
+            }
+        });
     }
 
     @Override
-    public void getMoreContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, int currentPage, int currentItemCount) {
+    public void getMoreContents(@NonNull OnLoadDataCallBack<List<Content>> loadDataCallBack, Point point, int currentPage, int currentItemCount) {
 
     }
 
     /**
      * 获取单元列表
      *
-     * @param loadUnitsCallback 回调
+     * @param loadDataCallBack 回调
      * @param isReadCache       是否需要缓存 (具体 local 和 remote可以传null)
      */
     @Override
-    public void getUnits(@NonNull final OnLoadDataCallBack<List<Unit>> loadUnitsCallback, Boolean isReadCache) {
+    public void getUnits(@NonNull final OnLoadDataCallBack<List<Unit>> loadDataCallBack, Boolean isReadCache) {
         Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
                 try {
                     List<Unit> units = (List<Unit>) CacheHelper.readObject(mContext, CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
-                    loadUnitsCallback.onSuccess(units);
+                    loadDataCallBack.onSuccess(units);
                 } catch (Exception e) {
-                    loadUnitsCallback.onFail(CodeConfig.Error.CACHE, StaticValues.REQUEST_CACHE_ERROR);
+                    loadDataCallBack.onFail(CodeConfig.Error.CACHE, StaticValues.REQUEST_CACHE_ERROR);
                 }
 
             }
@@ -66,20 +79,20 @@ public class ReviewDocLocalDataSource implements ReviewDocDataSource {
     /**
      * 获取知识点列表
      *
-     * @param loadPointsCallback 回调
+     * @param loadDataCallBack 回调
      * @param isReadCache        是否需要缓存 (具体 local 和 remote可以传null)
      */
     @Override
-    public void getPoints(@NonNull final OnLoadDataCallBack<List<Point>> loadPointsCallback, Boolean isReadCache) {
+    public void getPoints(@NonNull final OnLoadDataCallBack<List<Point>> loadDataCallBack, Boolean isReadCache) {
         Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
                 try {
                     List<Point> points = (List<Point>) CacheHelper.readObject(mContext, CacheHelper.GROUP_POINT_LIST_CACHE_KEY);
-                    loadPointsCallback.onSuccess(points);
+                    loadDataCallBack.onSuccess(points);
                 } catch (Exception e) {
-                    loadPointsCallback.onFail(CodeConfig.Error.CACHE, StaticValues.REQUEST_CACHE_ERROR);
+                    loadDataCallBack.onFail(CodeConfig.Error.CACHE, StaticValues.REQUEST_CACHE_ERROR);
                 }
 
             }

@@ -60,7 +60,7 @@ import cn.bmob.v3.listener.FindListener;
  * Description：
  */
 public class TestFragment extends BaseFragment {
-    //toolbar 已做题目数目统计
+    //mToolbar 已做题目数目统计
     private static int sTestCount = 0;
     //单选题
     public static final int TYPE_SINGLE_ANSWER = 1;

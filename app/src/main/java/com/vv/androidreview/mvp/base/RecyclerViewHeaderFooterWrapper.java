@@ -258,7 +258,7 @@ public class RecyclerViewHeaderFooterWrapper<T extends RecyclerView.Adapter> ext
         }
     }
 
-    // our header/footer RecyclerView.ViewHolder is just a FrameLayout
+    // our header/footer RecyclerView.ItemRecycleHolder is just a FrameLayout
     public static class HeaderFooterViewHolder extends ViewHolder {
         FrameLayout base;
 

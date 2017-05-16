@@ -10,23 +10,23 @@ import com.vv.androidreview.mvp.component.pulltorefresh.RecyclePullToRefreshFrag
  * Description：
  */
 
-public class ReviewFragmentEx extends RecyclePullToRefreshFragment<ReviewListAdapterGV> implements ReviewContract.ReviewView {
+public class ReviewFragment extends RecyclePullToRefreshFragment<ReviewListAdapter> implements ReviewContract.ReviewView {
 
     private ReviewContract.ReviewPresenter mReviewPresenter;
 
-    private ReviewListAdapterGV mAdapter;
+    private ReviewListAdapter mAdapter;
 
-    public static ReviewFragmentEx newInstance() {
+    public static ReviewFragment newInstance() {
         Bundle args = new Bundle();
-        ReviewFragmentEx fragment = new ReviewFragmentEx();
+        ReviewFragment fragment = new ReviewFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public ReviewListAdapterGV getAdapter() {
+    public ReviewListAdapter getAdapter() {
         if (mAdapter == null) {
-            mAdapter = new ReviewListAdapterGV(getActivity());
+            mAdapter = new ReviewListAdapter(getActivity());
         }
         return mAdapter;
     }
@@ -50,5 +50,10 @@ public class ReviewFragmentEx extends RecyclePullToRefreshFragment<ReviewListAda
     @Override
     public void setPresenter(ReviewContract.ReviewPresenter presenter) {
         this.mReviewPresenter = presenter;
+    }
+
+    @Override
+    public boolean isShowDivider() {
+        return false;
     }
 }

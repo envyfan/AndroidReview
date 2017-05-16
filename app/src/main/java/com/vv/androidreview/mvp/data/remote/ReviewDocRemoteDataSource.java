@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import com.orhanobut.logger.Logger;
+import com.vv.androidreview.base.system.AppContext;
 import com.vv.androidreview.cache.CacheHelper;
 import com.vv.androidreview.mvp.config.AppConfig;
 import com.vv.androidreview.mvp.data.entity.Content;
@@ -13,13 +14,16 @@ import com.vv.androidreview.mvp.data.entity.Unit;
 import com.vv.androidreview.mvp.data.repository.interfaces.OnLoadDataCallBack;
 import com.vv.androidreview.mvp.data.repository.interfaces.ReviewDocDataSource;
 import com.vv.androidreview.mvp.config.CodeConfig;
-import com.vv.androidreview.mvp.system.StaticValues;
+import com.vv.androidreview.mvp.config.StaticValues;
 
 import java.io.Serializable;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
  * Created by Vv
@@ -36,8 +40,26 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
     }
 
     @Override
-    public void getContents(@NonNull OnLoadDataCallBack<List<Content>> loadContentsCallback, Point point, Boolean isReadCache) {
+    public void getContents(@NonNull final OnLoadDataCallBack<List<Content>> onLoadDataCallBack, final Point point, Boolean isReadCache) {
+        BmobQuery<Content> query = new BmobQuery<>();
+        query.setLimit(AppConfig.BaseConfig.COMMON_LIST_LIMIT);
 
+        String sql = "select title,small,createdAt from Content where point='" + point.getObjectId() + "' order by updatedAt DESC";
+        query.doSQLQuery(AppContext.getInstance(), sql, new SQLQueryListener<Content>() {
+            @Override
+            public void done(BmobQueryResult<Content> bmobQueryResult, BmobException e) {
+                if (e == null) {
+                    //请求成功
+                    final List<Content> list = bmobQueryResult.getResults();
+                    onLoadDataCallBack.onSuccess(list);
+                    if (list != null && list.size() > 0) {
+                        cacheData(list, CacheHelper.CONTENT_LIST_CACHE_KEY + point.getObjectId());
+                    }
+                } else {
+                    onLoadDataCallBack.onFail(CodeConfig.Error.API, StaticValues.REQUEST_ERROR);
+                }
+            }
+        });
     }
 
     @Override
@@ -57,7 +79,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
         BmobQuery<Unit> query = new BmobQuery<>();
         //执行查询，查询单元表 取出所有单元
         query.order("score,sort");
-        query.setLimit(AppConfig.BaseConfig.HOME_SCREEN_LIST_LIMIT);
+        query.setLimit(AppConfig.ReviewPageConfig.PAGE_REVIEW_LIST_LIMIT);
         query.findObjects(mContext, new FindListener<Unit>() {
             @Override
             public void onSuccess(final List<Unit> unitList) {
@@ -65,17 +87,7 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
 
                 //有数据才保存缓存，把原来的缓存覆盖
                 if (unitList != null && unitList.size() > 0) {
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                CacheHelper.saveObject(mContext, (Serializable) unitList, CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
-                            } catch (Exception e) {
-                                Logger.e("save unit cache failed");
-                            }
-                        }
-                    });
+                    cacheData(unitList, CacheHelper.GROUP_UNIT_LIST_CACHE_KEY);
                 }
             }
 
@@ -105,23 +117,27 @@ public class ReviewDocRemoteDataSource implements ReviewDocDataSource {
 
                 //有数据才保存缓存，把原来的缓存覆盖
                 if (pointList != null && pointList.size() > 0) {
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                CacheHelper.saveObject(mContext, (Serializable) pointList, CacheHelper.GROUP_POINT_LIST_CACHE_KEY);
-                            } catch (Exception e) {
-                                Logger.e("save points cache failed");
-                            }
-                        }
-                    });
+                    cacheData(pointList, CacheHelper.GROUP_POINT_LIST_CACHE_KEY);
                 }
             }
 
             @Override
             public void onError(int i, String s) {
                 loadPointsCallback.onFail(CodeConfig.Error.API, StaticValues.REQUEST_ERROR);
+            }
+        });
+    }
+
+    private void cacheData(final Object object, final String cacheKey) {
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    CacheHelper.saveObject(mContext, (Serializable) object, cacheKey);
+                } catch (Exception e) {
+                    Logger.e("save points cache failed");
+                }
             }
         });
     }

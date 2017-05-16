@@ -18,12 +18,20 @@
   -->
 
 <resources>
+    <!-- review page start-->
+    <dimen name="review_page_list_item_title_padding">5dp</dimen>
+    <dimen name="review_page_list_item_title_size">16sp</dimen>
+    <dimen name="review_page_list_item_vertical_margin">20dp</dimen>
+    <dimen name="review_page_list_item_horizontal_margin">10dp</dimen>
+
+    <dimen name="review_page_list_item_cardview_width">120dp</dimen>
+    <dimen name="review_page_list_item_cardview_height">100dp</dimen>
+    <dimen name="review_page_list_item_cardview_margin">10dp</dimen>
+    <dimen name="review_page_list_item_cardview_radius">10dp</dimen>
+    <dimen name="review_page_list_item_cardview_text_size">12sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- review page end-->
 
-    <dimen name="list_review_carview_width">120dp</dimen>
-    <dimen name="list_review_carview_height">100dp</dimen>
-    <dimen name="padding_top_to_horizontalscrollview_and_carview">35dp</dimen>
-    <dimen name="padding_buttom_to_horizontalscrollview_and_carview">35dp</dimen>
 </resources>

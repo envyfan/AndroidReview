@@ -11,6 +11,8 @@ import com.vv.androidreview.mvp.data.repository.ContentRepository;
 import com.vv.androidreview.mvp.data.repository.interfaces.OnLoadDataCallBack;
 import com.vv.androidreview.mvp.data.repository.interfaces.ReviewDocDataSource;
 import com.vv.androidreview.mvp.config.CodeConfig;
+import com.vv.androidreview.mvp.config.StaticValues;
+import com.vv.androidreview.mvp.tools.RequestDataUICallBackHelper;
 import com.vv.androidreview.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -27,13 +29,13 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
     private ReviewDocDataSource mReviewDocDataSource;
     private ReviewContract.ReviewView mReviewView;
     private RefreshableView mRefreshableView;
-    private RecycleRefreshableView<ReviewListAdapterGV> mRecycleRefreshableView;
+    private RecycleRefreshableView<ReviewListAdapter> mRecycleRefreshableView;
 
     private List<Map<String, List<Point>>> mData = new ArrayList<>();
 
     public ReviewPresenter(Context context, ReviewContract.ReviewView reviewView,
                            RefreshableView refreshableView,
-                           RecycleRefreshableView<ReviewListAdapterGV> recycleRefreshableView) {
+                           RecycleRefreshableView<ReviewListAdapter> recycleRefreshableView) {
         mReviewDocDataSource = new ContentRepository(context);
         mReviewView = reviewView;
         this.mRefreshableView = refreshableView;
@@ -58,11 +60,7 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
-                if (isAutoRequest) {
-                    mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_ERROR);
-                } else {
-                    mRefreshableView.completePullToRefresh(errorMsg);
-                }
+                RequestDataUICallBackHelper.normalRequestFail(isAutoRequest, mRefreshableView, errorMsg);
             }
         }, isReadCache);
     }
@@ -73,17 +71,12 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
             public void onSuccess(List<Point> data) {
                 if (data != null && data.size() > 0) {
                     Logger.d("point size : " + data.size());
-                    //清空数据
-                    clearData();
+
                     //根据所有单元，组合好以Map<String,List<Point>> 形式的View以便adapter好处理
                     packageAdapterData(data, units);
-                    updateDataForAdapter();
+                    mRecycleRefreshableView.getAdapter().setData(mData);
 
-                    if (isAutoRequest) {
-                        mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_HIDE);
-                    } else {
-                        mRefreshableView.completePullToRefresh();
-                    }
+                    RequestDataUICallBackHelper.normalRequestSuccess(isAutoRequest, mRefreshableView);
 
                 } else {
                     mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_REFRESH);
@@ -92,16 +85,13 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
-                if (isAutoRequest) {
-                    mRefreshableView.completeDataLoading(CodeConfig.LoadingLayoutConfig.LAYOUT_TYPE_ERROR);
-                } else {
-                    mRefreshableView.completePullToRefresh(errorMsg);
-                }
+                RequestDataUICallBackHelper.normalRequestFail(isAutoRequest, mRefreshableView, errorMsg);
             }
         }, isReadCache);
     }
 
     private void packageAdapterData(List<Point> points, List<Unit> units) {
+        clearData();
         //根据所有单元，组合好以Map<String,List<Point>> 形式的View以便adapter好处理
         for (Unit unit : units) {
             Map<String, List<Point>> map = new HashMap<>();
@@ -116,8 +106,8 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
             //如果无数据，则插入一个空数据用于 友好提示
             if (pointsForUnit.size() == 0) {
                 Point point = new Point();
-                point.setName("暂无内容\n敬请期待");
-                point.setColor(ReviewListAdapterGV.NO_CONTENT);
+                point.setName(StaticValues.DEFAULT_POINT_NAME);
+                point.setColor(ReviewListAdapter.NO_CONTENT);
                 pointsForUnit.add(point);
             }
             map.put(unit.getName(), pointsForUnit);
@@ -133,9 +123,4 @@ public class ReviewPresenter implements ReviewContract.ReviewPresenter {
         }
     }
 
-    private void updateDataForAdapter() {
-        ReviewListAdapterGV adapter = mRecycleRefreshableView.getAdapter();
-        adapter.setDatas(mData);
-        adapter.notifyDataSetChanged();
-    }
 }

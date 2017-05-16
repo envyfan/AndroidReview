@@ -52,32 +52,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         Logger.d("当前Activity 栈中有：" + AppManager.getAppManager().getActivityCount() + "个Activity");
     }
 
-
-    /**
-     * 添加Fragment到Activity
-     *
-     * @param fragment        添加的Fragment
-     * @param contentLayoutId 添加到的布局Id
-     * @param tag             Fragment tag
-     */
-    public void addFragmentToActivity(@NonNull Fragment fragment, int contentLayoutId, @NonNull String tag) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(contentLayoutId, fragment, tag);
-        transaction.commit();
-    }
-
-    /**
-     * 添加Fragment到Activity
-     *
-     * @param fragment        添加的Fragment
-     * @param contentLayoutId 添加到的布局Id
-     */
-    public void addFragmentToActivity(@NonNull Fragment fragment, int contentLayoutId) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(contentLayoutId, fragment);
-        transaction.commit();
-    }
-
     /**
      * 设置兼容4.4版本 状态栏颜色改变成和5.0效果差不多
      * 1、需要在values-19加上支持SystemWindows
