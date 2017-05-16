@@ -37,7 +37,7 @@ import com.vv.androidreview.utils.TDevice;
 /**
  * Author：Vv on 2015/7/21 14:41
  * Mail：envyfan@qq.com
- * Description：
+ * Description：基类
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
